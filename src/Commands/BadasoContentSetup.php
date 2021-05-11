@@ -7,12 +7,13 @@ use Uasoft\Badaso\Module\Content\Seeder\ContentModuleSeeder;
 
 class BadasoContentSetup extends Command
 {
+    private $isGenerateSeeder;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'badaso-content:setup';
+    protected $signature = 'badaso-content:setup {--generateSeeder=false}';
 
     /**
      * The console command description.
@@ -39,15 +40,27 @@ class BadasoContentSetup extends Command
     public function handle()
     {
         try {
-            $this->call('db:seed', [
-                '--class' => ContentModuleSeeder::class,
-            ]);
+            $this->isGenerateSeeder = $this->option('generateSeeder');
+            if ($this->isGenerateSeeder == null) {
+                $this->isGenerateSeeder = true;
+            }
 
-            // $this->call('badaso:generate-seeder', [
-            //     'tables' =>'menus,menu_items,permissions',
-            // ]);
+            $this->generateSeeder();
         } catch (\Exception $e) {
             $this->error($e->getMessage());
+        }
+    }
+
+    private function generateSeeder()
+    {
+        $this->call('db:seed', [
+            '--class' => ContentModuleSeeder::class,
+        ]);
+
+        if ($this->isGenerateSeeder == 'true') {
+            $this->call('badaso:generate-seeder', [
+                'tables' => 'menus,menu_items,permissions',
+            ]);
         }
     }
 }
