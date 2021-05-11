@@ -61,7 +61,7 @@
               <template v-for="(item, key, index) in items">
                 <tr :key="items.name + '-' + key">
                   <td>
-                    <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="$contentHelper.isMultipleFields(item)"></vs-icon>
+                    <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
                   </td>
                   <td>
                     <badaso-text
@@ -143,6 +143,9 @@
 </template>
 
 <script>
+
+import contentHelper from '../../utils/content-helper'
+
 export default {
   name: "ContentManagementAdd",
   components: {},
@@ -158,7 +161,8 @@ export default {
     willCopyItem: {},
     copyItemDialog: false,
     copyItemName: "",
-    invalid: false
+    invalid: false,
+    contentHelper
   }),
   computed: {
     validName() {
@@ -166,7 +170,7 @@ export default {
     },
     fieldList: {
       get() {
-        return this.$contentHelper.getAllTypeContent();
+        return contentHelper.getAllTypeContent();
       },
     },
     tableStyles() {
@@ -175,7 +179,8 @@ export default {
       }
     }
   },
-  mounted() {},
+  mounted() {
+  },
   watch: {
     'content.label': {
       handler(val, oldVal) {
@@ -185,7 +190,6 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(this.invalid);
       if (!this.invalid) {
         this.$openLoader()
         this.$api.badasoContent
@@ -201,7 +205,7 @@ export default {
               text: response.message,
               color: "success",
             });
-            this.$router.push({ name: "ContentBrowse" });
+            this.$router.push({ name: "ContentManagementBrowse" });
           })
           .catch((error) => {
             this.$closeLoader();

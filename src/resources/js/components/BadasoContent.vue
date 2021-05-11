@@ -5,7 +5,7 @@
         <template v-for="(item, key, index) in items.data">
           <tr :key="items.name + '-' + key">
             <td style="vertical-align: inherit;">
-              <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="$contentHelper.isMultipleFields(item)"></vs-icon>
+              <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
             </td>
             <td>
               <badaso-text
@@ -81,6 +81,8 @@
 
 <script>
 import * as _ from 'lodash'
+import contentHelper from '../utils/content-helper'
+
 export default {
   name: "BadasoContent",
   components: {},
@@ -92,7 +94,8 @@ export default {
     willCopyItem: {},
     copyItemDialog: false,
     copyItemName: "",
-    invalid: false
+    invalid: false,
+    contentHelper
   }),
   props: {
     items: {
@@ -111,7 +114,7 @@ export default {
     },
     fieldList: {
       get() {
-        return this.$contentHelper.getAllTypeContent();
+        return contentHelper.getAllTypeContent();
       },
     },
     tableStyles() {

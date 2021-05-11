@@ -44,7 +44,10 @@
 <script>
 import { required } from "vuelidate/lib/validators";
 
+import contentHelper from '../utils/content-helper'
+
 export default {
+  name : "BadasoContentAddField",
   data: () => ({
     field: {
       name: "",
@@ -57,7 +60,7 @@ export default {
   computed: {
     getTypeContent: {
       get() {
-        return this.$contentHelper.getAllTypeContent();
+        return contentHelper.getAllTypeContent();
       },
     },
   },
