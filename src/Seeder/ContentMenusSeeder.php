@@ -30,7 +30,6 @@ class ContentMenusSeeder extends Seeder
 
             $menus->insert($new_menus);
         } catch (Exception $e) {
-            throw new Exception('Exception occur '.$e);
             \DB::rollBack();
         }
 

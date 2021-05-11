@@ -87,8 +87,6 @@ class ContentTableSeeder extends Seeder
             \DB::commit();
         } catch (Exception $e) {
             \DB::rollBack();
-
-            throw new Exception('Exception occur '.$e);
         }
     }
 }

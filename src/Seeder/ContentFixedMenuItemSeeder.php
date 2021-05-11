@@ -16,7 +16,7 @@ class ContentFixedMenuItemSeeder extends Seeder
     {
         \DB::beginTransaction();
         try {
-            $menus = \DB::table('menus')->where('key', BadasoContentModule::moduleName());
+            $menus = \DB::table('menus')->where('key', BadasoContentModule::moduleName())->first();
             $menu_id = $menus->id;
 
             $menu_items = \DB::table('menu_items');
@@ -36,7 +36,6 @@ class ContentFixedMenuItemSeeder extends Seeder
 
             $menu_items->insert($add_menus_item);
         } catch (Exception $e) {
-            throw new Exception('Exception occur '.$e);
             \DB::rollBack();
         }
 

@@ -4,7 +4,7 @@ namespace Uasoft\Badaso\Module\Content\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class FacadesBadasoContentModule extends Facade
+class BadasoContentModule extends Facade
 {
     /**
      * Get the registered name of the component.

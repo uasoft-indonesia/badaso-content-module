@@ -7,20 +7,19 @@ use Illuminate\Support\Facades\Artisan;
 
 class BadasoContentSetup extends Command
 {
-    protected $file;
     /**
-     * The console command name.
+     * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'badaso-content:setup';
+    protected $signature = 'badaso-content:setup';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Setup Badaso Content Manager Modules';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -29,7 +28,6 @@ class BadasoContentSetup extends Command
      */
     public function __construct()
     {
-        $this->file = app('files');
         parent::__construct();
     }
 

@@ -13,7 +13,7 @@ class ContentModuleSeeder extends Seeder
     {
         $this->call(ContentTableSeeder::class);
         $this->call(ContentPermissionsSeeder::class);
-        $this->call(ContentModuleSeeder::class);
+        $this->call(ContentMenusSeeder::class);
         $this->call(ContentFixedMenuItemSeeder::class);
     }
 }

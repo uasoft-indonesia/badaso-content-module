@@ -4,7 +4,7 @@ namespace Uasoft\Badaso\Module\Content;
 
 class BadasoContentModule
 {
-    public function moduleName()
+    public static function moduleName()
     {
         return 'badaso-content-module';
     }

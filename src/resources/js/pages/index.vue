@@ -7,10 +7,19 @@
 </template>
 
 <script>
+import ContentManagementAdd from "./content/add";
+import ContentManagementBrowse from "./content/browse";
+import ContentManagementEdit from "./content/edit";
+import ContentManagementFill from "./content/fill";
+import ContentManagementRead from "./content/read";
 
 export default {
   components: {
-    
+    ContentManagementAdd,
+    ContentManagementBrowse,
+    ContentManagementEdit,
+    ContentManagementFill,
+    ContentManagementRead,
   },
   name: "BlogEntryIndex",
   data: () => ({
@@ -18,6 +27,7 @@ export default {
     defaultComponent: null,
   }),
   mounted() {
+
     const routeName = this.$route.name;
     const componentName = this.$caseConvert.kebab(routeName);
     const slug = this.$route.params ? this.$route.params.slug : "";

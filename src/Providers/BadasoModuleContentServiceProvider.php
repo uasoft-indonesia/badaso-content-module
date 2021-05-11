@@ -6,7 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Uasoft\Badaso\Module\Content\BadasoContentModule;
 use Uasoft\Badaso\Module\Content\Commands\BadasoContentSetup;
-use Uasoft\Badaso\Module\Content\Facades\FacadesBadasoContentModule;
+use Uasoft\Badaso\Module\Content\Facades\BadasoContentModule as FacadesBadasoContentModule;
 
 class BadasoModuleContentServiceProvider extends ServiceProvider
 {
