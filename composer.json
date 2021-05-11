@@ -30,7 +30,7 @@
       "email": "hello@uatech.co.id"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "alpha",
   "autoload": {
     "psr-4": {
       "Uasoft\\Badaso\\Module\\Content\\": "src/"
@@ -42,6 +42,5 @@
         "Uasoft\\Badaso\\Module\\Content\\Providers\\BadasoModuleContentServiceProvider"
       ]
     }
-  },
-  "prefer-stable" : true
+  }
 }
