@@ -3,7 +3,7 @@
 namespace Uasoft\Badaso\Module\Content\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
+use Uasoft\Badaso\Module\Content\Seeder\ContentModuleSeeder;
 
 class BadasoContentSetup extends Command
 {
@@ -38,12 +38,16 @@ class BadasoContentSetup extends Command
      */
     public function handle()
     {
-        $this->publishSeeder();
-    }
+        try {
+            $this->call('db:seed', [
+                '--class' => ContentModuleSeeder::class,
+            ]);
 
-    public function publishSeeder()
-    {
-        Artisan::call('vendor:publish', ['--tag' => 'BadasoContentModule', '--force' => true]);
-        $this->info('Success publish seeder');
+            // $this->call('badaso:generate-seeder', [
+            //     'tables' =>'menus,menu_items,permissions',
+            // ]);
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
     }
 }
