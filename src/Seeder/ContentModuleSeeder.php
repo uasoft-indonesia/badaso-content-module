@@ -11,7 +11,6 @@ class ContentModuleSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ContentTableSeeder::class);
         $this->call(ContentPermissionsSeeder::class);
         $this->call(ContentMenusSeeder::class);
         $this->call(ContentFixedMenuItemSeeder::class);
