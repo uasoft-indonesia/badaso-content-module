@@ -12,7 +12,7 @@ Route::group([
     'middleware' => [ApiRequest::class],
 ],
     function () {
-        Route::group(['prefix' => 'v1'], function () {
+        Route::group(['prefix' => 'v1/module'], function () {
             Route::group(['prefix' => 'content'], function () {
                 Route::get('/', 'ContentController@browse')->middleware(BadasoCheckPermissions::class.':browse_content');
                 Route::get('/read', 'ContentController@read')->middleware(BadasoCheckPermissions::class.':read_content');

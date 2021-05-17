@@ -219,7 +219,7 @@ class ContentController extends Controller
                 'ids' => 'required',
             ]);
 
-            $ids = $data['ids'];
+            $ids = $request->ids;
             $id_list = explode(',', $ids);
             foreach ($id_list as $id) {
                 $content = Content::where('id', $id)->firstOrFail();
