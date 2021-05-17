@@ -137,7 +137,7 @@ export default {
             text: response.message,
             color: "success",
           });
-          this.$router.push({ name: "ContentBrowse" });
+          this.$router.push({ name: "ContentManagementBrowse" });
         })
         .catch((error) => {
           this.$closeLoader();

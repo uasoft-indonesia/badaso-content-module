@@ -161,7 +161,7 @@ class ContentController extends Controller
 
             foreach ($collected as $key => $value) {
                 if ($value['type'] === 'image') {
-                    if (isset($value['data']) && is_array($value['data']) && !empty($value['data'])) {
+                    if (isset($value['data']) && is_array($value['data']) && ! empty($value['data'])) {
                         $fileName = $this->handleUploadFiles($value['data']);
                         $value['data'] = $fileName;
                     }
@@ -250,12 +250,12 @@ class ContentController extends Controller
             /*
              * Separate the base64 from its file type.
              */
-            @list($type, $file_data) = explode(';', $data['base64']);
+            @[$type, $file_data] = explode(';', $data['base64']);
 
             /*
              * Separate the base64 from the base64 label.
              */
-            @list(, $file_data) = explode(',', $file_data);
+            @[, $file_data] = explode(',', $file_data);
 
             /**
              * Get storage/app/public path.
@@ -296,7 +296,7 @@ class ContentController extends Controller
         $group = (object) [];
         foreach ($data as $groupKey => $groupValue) {
             if ($groupValue['type'] === 'image') {
-                if (isset($groupValue['data']) && is_array($groupValue['data']) && !empty($groupValue['data'])) {
+                if (isset($groupValue['data']) && is_array($groupValue['data']) && ! empty($groupValue['data'])) {
                     $fileName = $this->handleUploadFiles($groupValue['data']);
                     $groupValue['data'] = $fileName;
                 }
