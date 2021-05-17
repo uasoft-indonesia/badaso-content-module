@@ -16,9 +16,9 @@
   "license": "proprietary",
   "homepage": "https://badaso.uatech.co.id/",
   "support": {
-    "issues": "https://github.com/uasoft-indonesia/badaso-blog-module/issues",
-    "discussion": "https://github.com/uasoft-indonesia/badaso-blog-module/discussions",
-    "source": "https://github.com/uasoft-indonesia/badaso-blog-module"
+    "issues": "https://github.com/uasoft-indonesia/badaso-content-module/issues",
+    "discussion": "https://github.com/uasoft-indonesia/badaso-content-module/discussions",
+    "source": "https://github.com/uasoft-indonesia/badaso-content-module"
   },
   "type": "library",
   "require": {

@@ -12,6 +12,17 @@ class ContentPermissionsSeeder extends Seeder
      */
     public function run()
     {
+        $keys = [
+            'fill_content',
+        ];
+
+        foreach ($keys as $key) {
+            Permission::firstOrCreate([
+                'key' => $key,
+                'table_name' => null,
+            ]);
+        }
+
         Permission::generateFor('content');
     }
 }
