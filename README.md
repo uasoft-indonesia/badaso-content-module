@@ -2,7 +2,7 @@
 Manage your website content through dashboard easily out of the box
 
 ## How to installation content manager module
-1. Install badaso library <a href="https://badaso-docs.uatech.co.id/docs/en/getting-started/installation/" target="blank"> Badaso </a> from laravel project
+1. <a href="https://badaso-docs.uatech.co.id/docs/en/getting-started/installation/" target="blank"> Install Badaso </a> from laravel project
 2. Set env
 ```
 MIX_DEFAULT_MENU=admin
