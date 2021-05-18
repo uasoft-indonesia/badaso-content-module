@@ -2,7 +2,7 @@
 Manage your website content through dashboard easily out of the box
 
 ## How to installation content manager module
-1. install badaso library <a href="https://badaso-docs.uatech.co.id/"> Badaso Installation </a>
+1. install badaso library <a href="https://badaso-docs.uatech.co.id/docs/en/getting-started/installation/"> Badaso Installation </a>
 2. set env
 ```
 MIX_DEFAULT_MENU=admin
