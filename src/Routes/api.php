@@ -5,14 +5,15 @@ use Uasoft\Badaso\Middleware\BadasoCheckPermissions;
 
 $api_route_prefix = \config('badaso.api_route_prefix');
 
-Route::group([
-    'prefix' => $api_route_prefix,
-    'namespace' => 'Uasoft\Badaso\Module\Content\Controllers',
-    'as' => 'badaso.',
-    'middleware' => [ApiRequest::class],
-],
+Route::group(
+    [
+        'prefix'     => $api_route_prefix,
+        'namespace'  => 'Uasoft\Badaso\Module\Content\Controllers',
+        'as'         => 'badaso.',
+        'middleware' => [ApiRequest::class],
+    ],
     function () {
-        Route::group(['prefix' => 'v1'], function () {
+        Route::group(['prefix' => 'v1/module'], function () {
             Route::group(['prefix' => 'content'], function () {
                 Route::get('/', 'ContentController@browse')->middleware(BadasoCheckPermissions::class.':browse_content');
                 Route::get('/read', 'ContentController@read')->middleware(BadasoCheckPermissions::class.':read_content');

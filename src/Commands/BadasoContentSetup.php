@@ -62,5 +62,11 @@ class BadasoContentSetup extends Command
                 'tables' => 'menus,menu_items,permissions',
             ]);
         }
+
+        $this->call('vendor:publish', [
+            '--tag' => 'badasoContentModule',
+        ]);
+
+        $this->call('l5-swagger:generate');
     }
 }

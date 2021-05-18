@@ -28,6 +28,10 @@ class BadasoModuleContentServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
         $this->loadRoutesFrom(__DIR__.'/../Routes/api.php');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'badaso-content');
+
+        $this->publishes([
+            __DIR__.'/../Swagger' => app_path('Http/Swagger/swagger_models'),
+        ], 'badasoContentModule');
     }
 
     /**
