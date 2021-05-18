@@ -1,7 +1,7 @@
 # @badaso/content
 Manage your website content through dashboard easily out of the box
 
-##how to installation content manager module
+## how to installation content manager module
 1. set env
 ```
 MIX_DEFAULT_MENU=admin
