@@ -38,48 +38,47 @@
  *      @OA\Response(response=402, description="Payment Required"),
  * )
  */
- 
- /**
- * @OA\Get(
- *      path="/v1/module/content/fetch",
- *      operationId="browseModuleContentV1ContentFetch",
- *      tags={"Module Content"},
- *      summary="Fetch Content",
- *      description="Fetch Content",
- *      @OA\Parameter(
- *          name="slug",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *      ),
- *      @OA\Response(response=200, description="Successful operation"),
- *      @OA\Response(response=400, description="Bad request"),
- *      @OA\Response(response=401, description="Unauthorized"),
- *      @OA\Response(response=402, description="Payment Required"),
- * )
- */ 
- 
- /**
- * @OA\Get(
- *      path="/v1/module/content/fetch-multiple",
- *      operationId="browseModuleContentV1ContentFetchMultiple",
- *      tags={"Module Content"},
- *      summary="Fetch Multiple Content",
- *      description="Fetch Multiple Content",
- *      @OA\Parameter(
- *          name="slug",
- *          required=true,
- *          in="query",
- *          @OA\Schema(
- *              type="string"
- *          )
- *      ),
- *      @OA\Response(response=200, description="Successful operation"),
- *      @OA\Response(response=400, description="Bad request"),
- *      @OA\Response(response=401, description="Unauthorized"),
- *      @OA\Response(response=402, description="Payment Required"),
- * )
- */
 
+ /**
+  * @OA\Get(
+  *      path="/v1/module/content/fetch",
+  *      operationId="browseModuleContentV1ContentFetch",
+  *      tags={"Module Content"},
+  *      summary="Fetch Content",
+  *      description="Fetch Content",
+  *      @OA\Parameter(
+  *          name="slug",
+  *          required=true,
+  *          in="query",
+  *          @OA\Schema(
+  *              type="string"
+  *          )
+  *      ),
+  *      @OA\Response(response=200, description="Successful operation"),
+  *      @OA\Response(response=400, description="Bad request"),
+  *      @OA\Response(response=401, description="Unauthorized"),
+  *      @OA\Response(response=402, description="Payment Required"),
+  * )
+  */
+
+ /**
+  * @OA\Get(
+  *      path="/v1/module/content/fetch-multiple",
+  *      operationId="browseModuleContentV1ContentFetchMultiple",
+  *      tags={"Module Content"},
+  *      summary="Fetch Multiple Content",
+  *      description="Fetch Multiple Content",
+  *      @OA\Parameter(
+  *          name="slug",
+  *          required=true,
+  *          in="query",
+  *          @OA\Schema(
+  *              type="string"
+  *          )
+  *      ),
+  *      @OA\Response(response=200, description="Successful operation"),
+  *      @OA\Response(response=400, description="Bad request"),
+  *      @OA\Response(response=401, description="Unauthorized"),
+  *      @OA\Response(response=402, description="Payment Required"),
+  * )
+  */

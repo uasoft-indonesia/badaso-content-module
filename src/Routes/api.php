@@ -5,12 +5,13 @@ use Uasoft\Badaso\Middleware\BadasoCheckPermissions;
 
 $api_route_prefix = \config('badaso.api_route_prefix');
 
-Route::group([
-    'prefix' => $api_route_prefix,
-    'namespace' => 'Uasoft\Badaso\Module\Content\Controllers',
-    'as' => 'badaso.',
-    'middleware' => [ApiRequest::class],
-],
+Route::group(
+    [
+        'prefix'     => $api_route_prefix,
+        'namespace'  => 'Uasoft\Badaso\Module\Content\Controllers',
+        'as'         => 'badaso.',
+        'middleware' => [ApiRequest::class],
+    ],
     function () {
         Route::group(['prefix' => 'v1/module'], function () {
             Route::group(['prefix' => 'content'], function () {

@@ -11,29 +11,30 @@ class ContentFixedMenuItemSeeder extends Seeder
     /**
      * Auto generated seed file.
      *
-     * @return void
-     *
      * @throws Exception
+     *
+     * @return void
      */
     public function run()
     {
         \DB::beginTransaction();
+
         try {
             $menus = \DB::table('menus')->where('key', BadasoContentModule::moduleName())->first();
             $menu_id = $menus->id;
 
             $add_menus_item = [
-                'menu_id' => $menu_id,
-                'title' => 'Content Manager',
-                'url' => '/content',
-                'target' => '_self',
-                'icon_class' => 'dashboard_customize',
-                'color' => '',
-                'parent_id' => null,
-                'order' => 2,
+                'menu_id'     => $menu_id,
+                'title'       => 'Content Manager',
+                'url'         => '/content',
+                'target'      => '_self',
+                'icon_class'  => 'dashboard_customize',
+                'color'       => '',
+                'parent_id'   => null,
+                'order'       => 2,
                 'permissions' => 'browse_content',
-                'created_at' => '2021-01-01 15:26:06',
-                'updated_at' => '2021-01-01 15:26:06',
+                'created_at'  => '2021-01-01 15:26:06',
+                'updated_at'  => '2021-01-01 15:26:06',
             ];
 
             MenuItem::firstOrCreate($add_menus_item);

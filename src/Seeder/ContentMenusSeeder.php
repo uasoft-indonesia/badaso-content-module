@@ -11,19 +11,20 @@ class ContentMenusSeeder extends Seeder
     /**
      * Auto generated seed file.
      *
-     * @return void
-     *
      * @throws Exception
+     *
+     * @return void
      */
     public function run()
     {
         \DB::beginTransaction();
+
         try {
             $new_menus = [
-                'key' => BadasoContentModule::moduleName(),
+                'key'          => BadasoContentModule::moduleName(),
                 'display_name' => 'Content Manager',
-                'created_at' => '2021-01-01 15:26:06',
-                'updated_at' => '2021-01-01 15:26:06',
+                'created_at'   => '2021-01-01 15:26:06',
+                'updated_at'   => '2021-01-01 15:26:06',
             ];
 
             Menu::firstOrCreate($new_menus);
