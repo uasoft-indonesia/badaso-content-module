@@ -37,8 +37,8 @@ class ContentController extends Controller
             $content = Content::where('id', $request->id)->firstOrFail();
 
             $data = [
-                'id' => $content->id,
-                'slug' => $content->slug,
+                'id'    => $content->id,
+                'slug'  => $content->slug,
                 'label' => $content->label,
                 'value' => $content->value,
             ];
@@ -96,7 +96,7 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'slug' => 'required|string',
+                'slug'  => 'required|string',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -123,8 +123,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id' => 'required',
-                'slug' => 'required|string',
+                'id'    => 'required',
+                'slug'  => 'required|string',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -151,8 +151,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id' => 'required|exists:content,id',
-                'slug' => 'required|string|exists:content,slug',
+                'id'    => 'required|exists:content,id',
+                'slug'  => 'required|string|exists:content,slug',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -214,12 +214,13 @@ class ContentController extends Controller
     public function deleteMultiple(Request $request)
     {
         DB::beginTransaction();
+
         try {
             $request->validate([
                 'ids' => 'required',
             ]);
 
-            $ids = $data['ids'];
+            $ids = $request->ids;
             $id_list = explode(',', $ids);
             foreach ($id_list as $id) {
                 $content = Content::where('id', $id)->firstOrFail();
