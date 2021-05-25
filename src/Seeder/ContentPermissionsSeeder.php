@@ -18,8 +18,8 @@ class ContentPermissionsSeeder extends Seeder
 
         foreach ($keys as $key) {
             Permission::firstOrCreate([
-                'key'         => $key,
-                'table_name'  => 'content',
+                'key' => $key,
+                'table_name' => 'content',
                 'description' => 'Fill content',
             ]);
         }

@@ -31,15 +31,19 @@
         color="primary"
         @cancel="copyItemName = ''"
         @accept="copyItem"
-        @close="willCopyItem = {}; copyItemName = ''"
+        @close="
+          willCopyItem = {};
+          copyItemName = '';
+        "
         :is-valid="validName"
-        :active.sync="copyItemDialog">
+        :active.sync="copyItemDialog"
+      >
         <div class="con-exemple-prompt">
           <badaso-text
             v-model="copyItemName"
             size="12"
             :label="$t('content.add.field.content.name.title')"
-            :placeholder=" $t('content.add.field.content.name.placeholder')"
+            :placeholder="$t('content.add.field.content.name.placeholder')"
           ></badaso-text>
         </div>
       </vs-prompt>
@@ -61,14 +65,24 @@
               <template v-for="(item, key, index) in items">
                 <tr :key="items.name + '-' + key">
                   <td>
-                    <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
+                    <vs-icon
+                      icon="chevron_right"
+                      :class="{
+                        'expandable rotate': opened.includes(index),
+                        expandable: !opened.includes(index),
+                      }"
+                      @click="toggle(index)"
+                      v-if="contentHelper.isMultipleFields(item)"
+                    ></vs-icon>
                   </td>
                   <td>
                     <badaso-text
                       v-model="item.label"
                       size="12"
                       :label="$t('content.add.field.content.label.title')"
-                      :placeholder="$t('content.add.field.content.label.placeholder')"
+                      :placeholder="
+                        $t('content.add.field.content.label.placeholder')
+                      "
                     ></badaso-text>
                   </td>
                   <td>
@@ -76,7 +90,9 @@
                       v-model="item.name"
                       size="12"
                       :label="$t('content.add.field.content.name.title')"
-                      :placeholder=" $t('content.add.field.content.name.placeholder')"
+                      :placeholder="
+                        $t('content.add.field.content.name.placeholder')
+                      "
                       disabled
                     ></badaso-text>
                   </td>
@@ -107,14 +123,23 @@
                     </vs-button>
                   </td>
                 </tr>
-                <tr :key="items.name + '-' + key + '-opened'" v-if="opened.includes(index)">
+                <tr
+                  :key="items.name + '-' + key + '-opened'"
+                  v-if="opened.includes(index)"
+                >
                   <td colspan="5" class="clear-td">
-                    <badaso-content :items="item" v-model="invalid"></badaso-content>
+                    <badaso-content
+                      :items="item"
+                      v-model="invalid"
+                    ></badaso-content>
                   </td>
                 </tr>
               </template>
             </tbody>
-            <badaso-content-add-field v-model="invalid" @click="addItem($event)"></badaso-content-add-field>
+            <badaso-content-add-field
+              v-model="invalid"
+              @click="addItem($event)"
+            ></badaso-content-add-field>
           </table>
         </vs-card>
       </vs-col>
@@ -146,8 +171,8 @@
 </template>
 
 <script>
-import * as _ from 'lodash'
-import contentHelper from '../../utils/content-helper'
+import * as _ from "lodash";
+import contentHelper from "../../utils/content-helper";
 
 export default {
   name: "ContentManagementEdit",
@@ -165,11 +190,11 @@ export default {
     copyItemDialog: false,
     copyItemName: "",
     invalid: false,
-    contentHelper
+    contentHelper,
   }),
   computed: {
     validName() {
-      return this.copyItemName.length > 0
+      return this.copyItemName.length > 0;
     },
     fieldList: {
       get() {
@@ -178,27 +203,20 @@ export default {
     },
     tableStyles() {
       return {
-        "padding-left": '15px'
-      }
-    }
+        "padding-left": "15px",
+      };
+    },
   },
   mounted() {
-    this.getContent()
-  },
-  watch: {
-    'content.label': {
-      handler(val, oldVal) {
-        this.content.slug = this.$helper.generateSlug(val)
-      }
-    }
+    this.getContent();
   },
   methods: {
     getContent() {
-      this.$openLoader()
+      this.$openLoader();
       this.$api.badasoContent
         .read({
           id: this.$route.params.id,
-          filtered: true
+          filtered: true,
         })
         .then((response) => {
           this.$closeLoader();
@@ -215,17 +233,16 @@ export default {
             color: "danger",
           });
         });
-      
     },
     submitForm() {
       if (!this.invalid) {
-        this.$openLoader()
+        this.$openLoader();
         this.$api.badasoContent
           .edit({
             id: this.$route.params.id,
             slug: this.content.slug,
             label: this.content.label,
-            value: JSON.stringify(this.items)
+            value: JSON.stringify(this.items),
           })
           .then((response) => {
             this.$closeLoader();
@@ -251,8 +268,8 @@ export default {
           title: this.$t("action.delete.title"),
           text: this.$t("content.warning.fieldNotSaved"),
           accept: () => {
-            this.invalid = false
-            this.submitForm()
+            this.invalid = false;
+            this.submitForm();
           },
           acceptText: this.$t("action.yes"),
           cancelText: this.$t("action.no"),
@@ -261,14 +278,14 @@ export default {
       }
     },
     addItem(event) {
-      this.$set(this.items, Object.keys(event), Object.values(event)[0])
+      this.$set(this.items, Object.keys(event), Object.values(event)[0]);
     },
     toggle(index) {
       if (this.opened.includes(index)) {
-        let idx = this.opened.indexOf(index)
-        this.opened.splice(idx, 1)
+        let idx = this.opened.indexOf(index);
+        this.opened.splice(idx, 1);
       } else {
-        this.opened.push(index)
+        this.opened.push(index);
       }
     },
     dropItem(items, item, key) {
@@ -290,28 +307,28 @@ export default {
         name: this.copyItemName,
       });
       this.$set(this.items, this.copyItemName, item);
-      this.copyItemName = '';
+      this.copyItemName = "";
     },
     openCopyItemDialog(item) {
-      this.willCopyItem = item
-      this.copyItemDialog = true
+      this.willCopyItem = item;
+      this.copyItemDialog = true;
     },
     changeDataType(item, event) {
-      if (event === 'group' || event === 'image') {
+      if (event === "group" || event === "image") {
         item.data = {};
       }
 
-      if (event === 'text') {
+      if (event === "text") {
         item.data = "";
       }
 
-      if (event === 'url') {
+      if (event === "url") {
         item.data = {
           url: "",
-          text: ""
+          text: "",
         };
       }
-    }
+    },
   },
 };
 </script>
