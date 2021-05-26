@@ -8,7 +8,7 @@ Manage your website content through dashboard easily out of the box
 ```
 MIX_DEFAULT_MENU=admin
 MIX_BADASO_MENU=${MIX_DEFAULT_MENU},badaso-content-module
-MIX_BADASO_PLUGINS=badaso-content-module
+MIX_BADASO_MODULES=badaso-content-module
 ```
 3. Call command `php artisan migrate`
 4. Call command `php artisan badaso-content:setup`, if with seeder menus, menu_items, and permission generate, call command `php artisan badaso-content:setup --generateSeeder`
