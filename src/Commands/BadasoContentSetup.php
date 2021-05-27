@@ -13,7 +13,7 @@ class BadasoContentSetup extends Command
      *
      * @var string
      */
-    protected $signature = 'badaso-content:setup {--generateSeeder=false}';
+    protected $signature = 'badaso-content:setup {--generate-seeder=false}';
 
     /**
      * The console command description.
@@ -40,7 +40,7 @@ class BadasoContentSetup extends Command
     public function handle()
     {
         try {
-            $this->isGenerateSeeder = $this->option('generateSeeder');
+            $this->isGenerateSeeder = $this->option('generate-seeder');
             if ($this->isGenerateSeeder == null) {
                 $this->isGenerateSeeder = true;
             }
