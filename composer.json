@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "name": "uasoft-indonesia/badaso-content-module",
   "description": "Zero development for blog system on badaso",
   "keywords": [
@@ -22,7 +22,7 @@
   },
   "type": "library",
   "require": {
-    "symfony/var-exporter": "^5.2"
+    "symfony/var-exporter": "^5.2.0"
   },
   "authors": [
     {
