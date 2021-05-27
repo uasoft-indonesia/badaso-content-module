@@ -11,7 +11,7 @@ MIX_BADASO_MENU=${MIX_DEFAULT_MENU},badaso-content-module
 MIX_BADASO_MODULES=badaso-content-module
 ```
 3. Call command `php artisan migrate`
-4. Call command `php artisan badaso-content:setup`, if with seeder menus, menu_items, and permission generate, call command `php artisan badaso-content:setup --generateSeeder`
+4. Call command `php artisan badaso-content:setup`, if with seeder menus, menu_items, and permission generate, call command `php artisan badaso-content:setup --generate-seeder`
 5. In menu item "Role Management" from badaso admin panel, add permission user to fill content
 
 ![image](https://user-images.githubusercontent.com/55905844/118775952-a90f3380-b8b1-11eb-9c32-d672f686aeb1.png)
