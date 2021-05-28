@@ -64,7 +64,7 @@ git clone https://github.com/uasoft-indonesia/badaso-content-module.git
 ```
 'providers' => [
   ...,
-  Uasoft\Badaso\Module\Content\Providers\BadasoModuleContentServiceProvider::class,
+  Uasoft\Badaso\Module\Content\Providers\BadasoContentModuleServiceProvider::class,
 ]
 ```
 
