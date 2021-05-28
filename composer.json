@@ -39,7 +39,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Uasoft\\Badaso\\Module\\Content\\Providers\\BadasoModuleContentServiceProvider"
+        "Uasoft\\Badaso\\Module\\Content\\Providers\\BadasoContentModuleServiceProvider"
       ]
     }
   }
