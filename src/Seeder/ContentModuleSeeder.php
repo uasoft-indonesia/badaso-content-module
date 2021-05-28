@@ -1,7 +1,5 @@
 <?php
 
-namespace Uasoft\Badaso\Module\Content\Seeder;
-
 use Illuminate\Database\Seeder;
 
 class ContentModuleSeeder extends Seeder
@@ -14,6 +12,7 @@ class ContentModuleSeeder extends Seeder
     public function run()
     {
         $this->call(ContentPermissionsSeeder::class);
+        $this->call(ContentRolePermissionsSeeder::class);
         $this->call(ContentMenusSeeder::class);
         $this->call(ContentFixedMenuItemSeeder::class);
     }

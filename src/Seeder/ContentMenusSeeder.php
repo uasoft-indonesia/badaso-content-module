@@ -1,10 +1,7 @@
 <?php
 
-namespace Uasoft\Badaso\Module\Content\Seeder;
-
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Menu;
-use Uasoft\Badaso\Module\Content\BadasoContentModule;
 
 class ContentMenusSeeder extends Seeder
 {
@@ -21,10 +18,10 @@ class ContentMenusSeeder extends Seeder
 
         try {
             $new_menus = [
-                'key'          => BadasoContentModule::moduleName(),
+                'key' => 'badaso-content-module',
                 'display_name' => 'Content Manager',
-                'created_at'   => '2021-01-01 15:26:06',
-                'updated_at'   => '2021-01-01 15:26:06',
+                'created_at' => '2021-01-01 15:26:06',
+                'updated_at' => '2021-01-01 15:26:06',
             ];
 
             Menu::firstOrCreate($new_menus);

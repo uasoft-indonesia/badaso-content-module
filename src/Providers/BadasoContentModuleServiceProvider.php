@@ -31,7 +31,8 @@ class BadasoContentModuleServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../Swagger' => app_path('Http/Swagger/swagger_models'),
-        ], 'badasoContentModule');
+            __DIR__.'/../Seeder' => database_path('seeds/Badaso/Content'),
+        ], 'badaso-content-module');
     }
 
     /**
