@@ -92,9 +92,14 @@ php artisan migrate
 ```
 php artisan badaso-content:setup
 ```
-if you want to automatic generate a seeder menu, menu item, and permissions, run the following command 
+if you want to overwrite the file 
 ```
-php artisan badaso-content:setup --generate-seeder
+php artisan badaso-content:setup --force
+```
+
+8. Run command 
+```
+composer dump-autoload
 ```
 
 8. Open the ```env``` file then add the following lines.
