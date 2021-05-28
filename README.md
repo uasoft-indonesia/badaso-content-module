@@ -12,8 +12,9 @@ MIX_BADASO_MODULES=badaso-content-module
 ```
 3. Call command `php artisan migrate`
 4. Call command `php artisan badaso-content:setup` or `php artisan badaso-content:setup --force` if you want to overwrite the file 
-6. Call command `composer dump-autoload`
-5. In menu item "Role Management" from badaso admin panel, add permission user to fill content
+5. Call command `composer dump-autoload`
+6. Call command `php artisan db:seed --class=ContentModuleSeeder`
+7. In menu item "Role Management" from badaso admin panel, add permission user to fill content
 
 ![image](https://user-images.githubusercontent.com/55905844/118775952-a90f3380-b8b1-11eb-9c32-d672f686aeb1.png)
 
