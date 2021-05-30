@@ -3,17 +3,16 @@
 namespace Uasoft\Badaso\Module\Content\Commands;
 
 use Illuminate\Console\Command;
-use Uasoft\Badaso\Module\Content\Seeder\ContentModuleSeeder;
 
 class BadasoContentSetup extends Command
 {
-    private $isGenerateSeeder;
+    private $force;
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'badaso-content:setup {--generate-seeder=false}';
+    protected $signature = 'badaso-content:setup {--force=false}';
 
     /**
      * The console command description.
@@ -40,11 +39,10 @@ class BadasoContentSetup extends Command
     public function handle()
     {
         try {
-            $this->isGenerateSeeder = $this->option('generate-seeder');
-            if ($this->isGenerateSeeder == null) {
-                $this->isGenerateSeeder = true;
+            $this->force = $this->option('force');
+            if ($this->force == null) {
+                $this->force = true;
             }
-
             $this->generateSeeder();
         } catch (\Exception $e) {
             $this->error($e->getMessage());
@@ -53,18 +51,9 @@ class BadasoContentSetup extends Command
 
     private function generateSeeder()
     {
-        $this->call('db:seed', [
-            '--class' => ContentModuleSeeder::class,
-        ]);
-
-        if ($this->isGenerateSeeder == 'true') {
-            $this->call('badaso:generate-seeder', [
-                'tables' => 'menus,menu_items,permissions',
-            ]);
-        }
-
         $this->call('vendor:publish', [
-            '--tag' => 'badasoContentModule',
+            '--tag' => 'badaso-content-module',
+            '--force' => $this->force,
         ]);
 
         $this->call('l5-swagger:generate');

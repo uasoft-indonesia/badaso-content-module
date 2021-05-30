@@ -1,10 +1,7 @@
 <?php
 
-namespace Uasoft\Badaso\Module\Content\Seeder;
-
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\MenuItem;
-use Uasoft\Badaso\Module\Content\BadasoContentModule;
 
 class ContentFixedMenuItemSeeder extends Seeder
 {
@@ -20,21 +17,21 @@ class ContentFixedMenuItemSeeder extends Seeder
         \DB::beginTransaction();
 
         try {
-            $menus = \DB::table('menus')->where('key', BadasoContentModule::moduleName())->first();
+            $menus = \DB::table('menus')->where('key', 'badaso-content-module')->first();
             $menu_id = $menus->id;
 
             $add_menus_item = [
-                'menu_id'     => $menu_id,
-                'title'       => 'Content Manager',
-                'url'         => '/content',
-                'target'      => '_self',
-                'icon_class'  => 'dashboard_customize',
-                'color'       => '',
-                'parent_id'   => null,
-                'order'       => 2,
+                'menu_id' => $menu_id,
+                'title' => 'Content Manager',
+                'url' => '/content',
+                'target' => '_self',
+                'icon_class' => 'dashboard_customize',
+                'color' => '',
+                'parent_id' => null,
+                'order' => 2,
                 'permissions' => 'browse_content',
-                'created_at'  => '2021-01-01 15:26:06',
-                'updated_at'  => '2021-01-01 15:26:06',
+                'created_at' => '2021-01-01 15:26:06',
+                'updated_at' => '2021-01-01 15:26:06',
             ];
 
             MenuItem::firstOrCreate($add_menus_item);

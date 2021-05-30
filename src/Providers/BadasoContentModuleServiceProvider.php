@@ -9,7 +9,7 @@ use Uasoft\Badaso\Module\Content\Commands\BadasoContentDummySeeder;
 use Uasoft\Badaso\Module\Content\Commands\BadasoContentSetup;
 use Uasoft\Badaso\Module\Content\Facades\BadasoContentModule as FacadesBadasoContentModule;
 
-class BadasoModuleContentServiceProvider extends ServiceProvider
+class BadasoContentModuleServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
@@ -31,7 +31,8 @@ class BadasoModuleContentServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../Swagger' => app_path('Http/Swagger/swagger_models'),
-        ], 'badasoContentModule');
+            __DIR__.'/../Seeder' => database_path('seeds/Badaso/Content'),
+        ], 'badaso-content-module');
     }
 
     /**
