@@ -101,8 +101,11 @@ php artisan badaso-content:setup --force
 ```
 composer dump-autoload
 ```
-
-8. Open the ```env``` file then add the following lines.
+9. Run command 
+```
+php artisan db:seed --class=ContentModuleSeeder
+```
+11. Open the ```env``` file then add the following lines.
 ```
 MIX_DEFAULT_MENU=admin
 MIX_BADASO_MENU=${MIX_DEFAULT_MENU},badaso-content-module
