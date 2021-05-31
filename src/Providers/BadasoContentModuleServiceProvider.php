@@ -5,7 +5,6 @@ namespace Uasoft\Badaso\Module\Content\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Uasoft\Badaso\Module\Content\BadasoContentModule;
-use Uasoft\Badaso\Module\Content\Commands\BadasoContentDummySeeder;
 use Uasoft\Badaso\Module\Content\Commands\BadasoContentSetup;
 use Uasoft\Badaso\Module\Content\Facades\BadasoContentModule as FacadesBadasoContentModule;
 
@@ -51,6 +50,5 @@ class BadasoContentModuleServiceProvider extends ServiceProvider
     private function registerConsoleCommands()
     {
         $this->commands(BadasoContentSetup::class);
-        $this->commands(BadasoContentDummySeeder::class);
     }
 }
