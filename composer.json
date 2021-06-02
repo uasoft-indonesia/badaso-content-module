@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "name": "uasoft-indonesia/badaso-content-module",
-  "description": "Zero development for blog system on badaso",
+  "description": "Zero development for web page content system on badaso",
   "keywords": [
     "laravel",
     "admin",
