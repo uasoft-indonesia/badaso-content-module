@@ -7,36 +7,36 @@ let apiPrefix = process.env.MIX_API_ROUTE_PREFIX
 
 export default {
   browse(data = {}) {
-    let ep = apiPrefix + "/v1/module/content";
+    let ep = apiPrefix + "/module/content/v1/content";
     let qs = QueryString(data);
     let url = ep + qs;
     return resource.get(url);
   },
 
   read(data) {
-    let ep = apiPrefix + "/v1/module/content/read";
+    let ep = apiPrefix + "/module/content/v1/content/read";
     let qs = QueryString(data);
     let url = ep + qs;
     return resource.get(url);
   },
 
   fill(data) {
-    return resource.put(apiPrefix + "/v1/module/content/fill", data);
+    return resource.put(apiPrefix + "/module/content/v1/content/fill", data);
   },
 
   edit(data) {
-    return resource.put(apiPrefix + "/v1/module/content/edit", data);
+    return resource.put(apiPrefix + "/module/content/v1/content/edit", data);
   },
 
   add(data) {
-    return resource.post(apiPrefix + "/v1/module/content/add", data);
+    return resource.post(apiPrefix + "/module/content/v1/content/add", data);
   },
 
   delete(data) {
     let paramData = {
       data: data,
     };
-    return resource.delete(apiPrefix + "/v1/module/content/delete", paramData);
+    return resource.delete(apiPrefix + "/module/content/v1/content/delete", paramData);
   },
 
   deleteMultiple(data) {
@@ -44,7 +44,7 @@ export default {
       data: data,
     };
     return resource.delete(
-      apiPrefix + "/v1/module/content/delete-multiple",
+      apiPrefix + "/module/content/v1/content/delete-multiple",
       paramData
     );
   },
