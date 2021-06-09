@@ -268,11 +268,11 @@ export default {
       this.copyItemDialog = true
     },
     changeDataType(item, event) {
-      if (event === 'group' || event === 'image') {
+      if (event === 'group') {
         item.data = {};
       }
 
-      if (event === 'text') {
+      if (event === 'text' || event === 'image') {
         item.data = "";
       }
 
