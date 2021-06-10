@@ -1,4 +1,8 @@
 export default {
+  action: {
+    yes: "Yes",
+    no: "No"
+  },
   content: {
     title: "Content Manager",
     warning: {

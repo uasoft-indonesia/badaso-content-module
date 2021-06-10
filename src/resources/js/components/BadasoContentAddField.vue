@@ -87,11 +87,11 @@ export default {
       if (this.show) {
         this.$v.field.$touch();
         if (!this.$v.field.$invalid) {
-          if (this.field.type === 'group' || this.field.type === 'image') {
+          if (this.field.type === 'group') {
             this.field.data = {};
           }
 
-          if (this.field.type === 'text') {
+          if (this.field.type === 'text' || this.field.type === 'image') {
             this.field.data = "";
           }
 
