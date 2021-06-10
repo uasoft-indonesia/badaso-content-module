@@ -22,7 +22,7 @@
           <template v-if="tr.type === 'image'">
             <img
               v-if="tr.data"
-              :src="$api.badasoFile.view(tr.data)"
+              :src="tr.data"
               :alt="tr.data"
               class="image-container"
             />
