@@ -132,11 +132,11 @@ export default {
       item.type === 'group' ? true : false
     },
     changeDataType(item, event) {
-      if (item.type === 'group' || item.type === 'image') {
+      if (item.type === 'group') {
         item.data = {};
       }
 
-      if (item.type === 'text') {
+      if (item.type === 'text' || item.type === 'image') {
         item.data = "";
       }
 
