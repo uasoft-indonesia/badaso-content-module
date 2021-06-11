@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders\Badaso\Content;
+
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Menu;
 
