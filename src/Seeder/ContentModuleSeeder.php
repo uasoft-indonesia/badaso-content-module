@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders\Badaso\Content;
+
 use Illuminate\Database\Seeder;
 
 class ContentModuleSeeder extends Seeder
