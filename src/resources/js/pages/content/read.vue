@@ -49,7 +49,7 @@
                     <template v-if="tr.type === 'image'">
                       <img
                         v-if="tr.data"
-                        :src="tr.data"
+                        :src="$storage.view(tr.data)"
                         :alt="tr.data"
                         class="image-container"
                       />
