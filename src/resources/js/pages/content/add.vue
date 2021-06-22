@@ -102,6 +102,22 @@
                     >
                       <vs-icon icon="delete"></vs-icon>
                     </vs-button>
+                    <vs-button
+                      color="warning"
+                      type="relief"
+                      @click="moveUp(item, key, index)"
+                      v-if="Object.values(items).length > 1 && index !== 0"
+                    >
+                      <vs-icon icon="expand_less"></vs-icon>
+                    </vs-button>
+                    <vs-button
+                      color="warning"
+                      type="relief"
+                      @click="moveDown(key, index)"
+                      v-if="Object.values(items).length > 1 && index !== Object.values(items).length - 1"
+                    >
+                      <vs-icon icon="expand_more"></vs-icon>
+                    </vs-button>
                   </td>
                 </tr>
                 <tr :key="items.name + '-' + key + '-opened'" v-if="opened.includes(index)">
@@ -157,7 +173,11 @@ export default {
     },
     opened: [],
     animated: false,
-    items: {},
+    items: {
+      1: {name:"1",label:"1",type:"text",data:""},
+      2: {name:"2",label:"2",type:"text",data:""},
+      3: {name:"3",label:"3",type:"text",data:""}
+    },
     willCopyItem: {},
     copyItemDialog: false,
     copyItemName: "",
@@ -282,6 +302,33 @@ export default {
           text: ""
         };
       }
+    },
+    moveDown(key, index) {
+      const temp = []
+      var tempObject = {}
+
+      for (const item in this.items) {
+        if (Object.hasOwnProperty.call(this.items, item)) {
+          temp.push(this.items[item])
+        }
+      }
+      [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]]
+
+      // for(let index in temp){
+      //   tempObject[temp[index]] = this.items[temp[index]];
+      // }
+      
+      tempObject = this.convertArrayToObject(temp, 'name')
+      console.log(temp);
+    },
+    convertArrayToObject(array, key) {
+      const initialValue = {};
+      return array.reduce((obj, item) => {
+        return {
+          ...obj,
+          [item[key]]: item,
+        };
+      }, initialValue);
     }
   },
 };
