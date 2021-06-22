@@ -66,7 +66,7 @@ class BadasoContentSetup extends Command
         $table_name = 'content';
         $config_name_file = 'badaso-hidden-tables';
         $hidden_table = config($config_name_file);
-        if (!in_array($table_name, $hidden_table)) {
+        if (! in_array($table_name, $hidden_table)) {
             $hidden_table[] = $table_name;
             $content_config = VarExporter::export($hidden_table);
             $content_config = <<<PHP
