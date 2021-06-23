@@ -1,4 +1,7 @@
 export default {
+  vuelidate: {
+    nonNumericOnFirstChar: 'Tidak boleh diawali oleh angka.'
+  },
   action: {
     yes: "Ya",
     no: "Tidak"
