@@ -22,7 +22,7 @@
           <template v-if="tr.type === 'image'">
             <img
               v-if="tr.data"
-              :src="tr.data"
+              :src="meta.mediaBaseUrl + tr.data"
               :alt="tr.data"
               class="image-container"
             />
@@ -51,6 +51,10 @@ export default {
   components: {},
   props: {
     items: {
+      type: Object,
+      required: true
+    },
+    meta: {
       type: Object,
       required: true
     }

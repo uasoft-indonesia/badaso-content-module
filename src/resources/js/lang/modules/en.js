@@ -1,4 +1,7 @@
 export default {
+  vuelidate: {
+    nonNumericOnFirstChar: 'No numeric on first character.'
+  },
   action: {
     yes: "Yes",
     no: "No"
