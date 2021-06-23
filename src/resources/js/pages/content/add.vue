@@ -175,53 +175,7 @@ export default {
     },
     opened: [],
     animated: false,
-    items: {
-      tist: {
-        name: "tist",
-        label: "Tist",
-        type: "group",
-        data: {
-          text: { name: "text", label: "Text", type: "text", data: "" },
-          image: { name: "image", label: "Image", type: "image", data: "" },
-          url: {
-            name: "url",
-            label: "URL",
-            type: "url",
-            data: { url: "", text: "" },
-          },
-        },
-      },
-      tost: {
-        name: "tost",
-        label: "Tist",
-        type: "group",
-        data: {
-          text: { name: "text", label: "Text", type: "text", data: "" },
-          image: { name: "image", label: "Image", type: "image", data: "" },
-          url: {
-            name: "url",
-            label: "URL",
-            type: "url",
-            data: { url: "", text: "" },
-          },
-        },
-      },
-      tast: {
-        name: "tast",
-        label: "Tist",
-        type: "group",
-        data: {
-          text: { name: "text", label: "Text", type: "text", data: "" },
-          image: { name: "image", label: "Image", type: "image", data: "" },
-          url: {
-            name: "url",
-            label: "URL",
-            type: "url",
-            data: { url: "", text: "" },
-          },
-        },
-      },
-    },
+    items: {},
     willCopyItem: {},
     copyItemDialog: false,
     copyItemName: "",
