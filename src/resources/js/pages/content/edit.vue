@@ -121,6 +121,24 @@
                     >
                       <vs-icon icon="delete"></vs-icon>
                     </vs-button>
+                    <vs-button
+                      color="warning"
+                      type="relief"
+                      @click="moveUp(index)"
+                      v-if="Object.values(items).length > 1"
+                      :disabled="index === 0"
+                    >
+                      <vs-icon icon="expand_less"></vs-icon>
+                    </vs-button>
+                    <vs-button
+                      color="warning"
+                      type="relief"
+                      @click="moveDown(index)"
+                      v-if="Object.values(items).length > 1"
+                      :disabled="index === Object.values(items).length - 1"
+                    >
+                      <vs-icon icon="expand_more"></vs-icon>
+                    </vs-button>
                   </td>
                 </tr>
                 <tr
@@ -329,6 +347,41 @@ export default {
         };
       }
     },
+    moveDown(index) {
+      const temp = []
+      var tempObject = {}
+      for (const item in this.items) {
+        if (Object.hasOwnProperty.call(this.items, item)) {
+          temp.push(this.items[item])
+        }
+      }
+      [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]]
+      
+      tempObject = this.convertArrayToObject(temp, 'name')
+      this.items = tempObject
+    },
+    moveUp(index) {
+      const temp = []
+      var tempObject = {}
+      for (const item in this.items) {
+        if (Object.hasOwnProperty.call(this.items, item)) {
+          temp.push(this.items[item])
+        }
+      }
+      [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]]
+      
+      tempObject = this.convertArrayToObject(temp, 'name')
+      this.items = tempObject
+    },
+    convertArrayToObject(array, key) {
+      const initialValue = {};
+      return array.reduce((obj, item) => {
+        return {
+          ...obj,
+          [item[key]]: item,
+        };
+      }, initialValue);
+    }
   },
 };
 </script>
