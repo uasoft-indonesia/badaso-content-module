@@ -94,7 +94,6 @@ export default {
     addItem() {
       if (this.show) {
         this.$v.field.$touch();
-        console.log(this.$v.field.name);
         if (!this.$v.field.$invalid) {
           if (this.field.type === 'group') {
             this.field.data = {};
