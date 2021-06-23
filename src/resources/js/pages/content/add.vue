@@ -105,16 +105,18 @@
                     <vs-button
                       color="warning"
                       type="relief"
-                      @click="moveUp(item, key, index)"
-                      v-if="Object.values(items).length > 1 && index !== 0"
+                      @click="moveUp(index)"
+                      v-if="Object.values(items).length > 1"
+                      :disabled="index === 0"
                     >
                       <vs-icon icon="expand_less"></vs-icon>
                     </vs-button>
                     <vs-button
                       color="warning"
                       type="relief"
-                      @click="moveDown(key, index)"
-                      v-if="Object.values(items).length > 1 && index !== Object.values(items).length - 1"
+                      @click="moveDown(index)"
+                      v-if="Object.values(items).length > 1"
+                      :disabled="index === Object.values(items).length - 1"
                     >
                       <vs-icon icon="expand_more"></vs-icon>
                     </vs-button>
@@ -173,11 +175,7 @@ export default {
     },
     opened: [],
     animated: false,
-    items: {
-      1: {name:"1",label:"1",type:"text",data:""},
-      2: {name:"2",label:"2",type:"text",data:""},
-      3: {name:"3",label:"3",type:"text",data:""}
-    },
+    items: {},
     willCopyItem: {},
     copyItemDialog: false,
     copyItemName: "",
@@ -303,7 +301,7 @@ export default {
         };
       }
     },
-    moveDown(key, index) {
+    moveDown(index) {
       const temp = []
       var tempObject = {}
 
@@ -313,13 +311,23 @@ export default {
         }
       }
       [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]]
-
-      // for(let index in temp){
-      //   tempObject[temp[index]] = this.items[temp[index]];
-      // }
       
       tempObject = this.convertArrayToObject(temp, 'name')
-      console.log(temp);
+      this.items = tempObject
+    },
+    moveUp(index) {
+      const temp = []
+      var tempObject = {}
+
+      for (const item in this.items) {
+        if (Object.hasOwnProperty.call(this.items, item)) {
+          temp.push(this.items[item])
+        }
+      }
+      [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]]
+      
+      tempObject = this.convertArrayToObject(temp, 'name')
+      this.items = tempObject
     },
     convertArrayToObject(array, key) {
       const initialValue = {};

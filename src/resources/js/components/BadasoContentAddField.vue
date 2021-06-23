@@ -14,7 +14,11 @@
         :placeholder="$t('content.fill.field.addField.name.placeholder')"
         v-model="field.name"
         size="12"
-        :alert="$v.field.name.$error ? $t('vuelidate.required', [ $t('content.fill.field.addField.name.title')]) : ''"
+        :alert="$v.field.type.$error ? [
+          $v.field.name.required ? '' : $t('vuelidate.required', [ $t('content.fill.field.addField.name.title')]),
+          $v.field.name.alphaNum ? '' : $t('vuelidate.alphaNum', [ $t('content.fill.field.addField.name.title')]),
+          $v.field.name.nonNumericOnFirstChar ? '' : $t('vuelidate.nonNumericOnFirstChar'),
+        ] : ''"
       ></badaso-text>
     </td>
     <td v-show="show">
@@ -42,9 +46,11 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, alphaNum, helpers } from "vuelidate/lib/validators";
 
 import contentHelper from '../utils/content-helper'
+
+const nonNumericOnFirstChar = (value) => helpers.regex(value, /^(?![0-9_])\w+$/)
 
 export default {
   name : "BadasoContentAddField",
@@ -74,6 +80,8 @@ export default {
       },
       name: {
         required,
+        alphaNum,
+        nonNumericOnFirstChar: nonNumericOnFirstChar(this.name)
       },
     },
   },
@@ -86,6 +94,7 @@ export default {
     addItem() {
       if (this.show) {
         this.$v.field.$touch();
+        console.log(this.$v.field.name);
         if (!this.$v.field.$invalid) {
           if (this.field.type === 'group') {
             this.field.data = {};
