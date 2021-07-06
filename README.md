@@ -13,6 +13,7 @@ composer require badaso/content-module
 For v1.x (Laravel 5,6,7)
 ```
 composer require badaso/content-module:^1.0
+```
 3. Set env
 ```
 MIX_DEFAULT_MENU=admin
