@@ -1,6 +1,6 @@
 {
   "version": "1.0.0-rc.3",
-  "name": "uasoft-indonesia/badaso-content-module",
+  "name": "badaso/content-module",
   "description": "Zero development for web page content system on badaso",
   "keywords": [
     "laravel",

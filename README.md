@@ -1,19 +1,29 @@
-# @badaso/content
+# badaso/content-module
 Manage your website content through dashboard easily out of the box
 
 ## How to installation content manager module
 1. <a href="https://badaso-docs.uatech.co.id/docs/en/getting-started/installation/" target="blank"> Install Badaso </a> from laravel project
-2. Install badaso content module `composer require uasoft-indonesia/badaso-content-module` 
+2. Install badaso content module
+
+For v2.x (Laravel 8)
+```
+composer require badaso/content-module
+```
+
+For v1.x (Laravel 5,6,7)
+```
+composer require badaso/content-module:^1.0
+```
 3. Set env
 ```
 MIX_DEFAULT_MENU=admin
-MIX_BADASO_MENU=${MIX_DEFAULT_MENU},badaso-content-module
-MIX_BADASO_MODULES=badaso-content-module
+MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module
+MIX_BADASO_MODULES=content-module
 ```
 3. Call command `php artisan migrate`
 4. Call command `php artisan badaso-content:setup` or `php artisan badaso-content:setup --force` if you want to overwrite the file 
 5. Call command `composer dump-autoload`
-6. Call command `php artisan db:seed --class=ContentModuleSeeder`
+6. Call command `php artisan db:seed --class=BadasoContentModuleSeeder`
 7. In menu item "Role Management" from badaso admin panel, add permission user to fill content
 
 ![image](https://user-images.githubusercontent.com/55905844/118775952-a90f3380-b8b1-11eb-9c32-d672f686aeb1.png)
