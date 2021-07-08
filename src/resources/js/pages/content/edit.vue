@@ -336,7 +336,7 @@ export default {
         item.data = {};
       }
 
-      if (event === 'text' || event === 'image') {
+      if (event === "text" || event === "image") {
         item.data = "";
       }
 
@@ -348,30 +348,30 @@ export default {
       }
     },
     moveDown(index) {
-      const temp = []
-      var tempObject = {}
+      const temp = [];
+      var tempObject = {};
       for (const item in this.items) {
         if (Object.hasOwnProperty.call(this.items, item)) {
-          temp.push(this.items[item])
+          temp.push(this.items[item]);
         }
       }
-      [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]]
-      
-      tempObject = this.convertArrayToObject(temp, 'name')
-      this.items = tempObject
+      [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]];
+
+      tempObject = this.convertArrayToObject(temp, "name");
+      this.items = tempObject;
     },
     moveUp(index) {
-      const temp = []
-      var tempObject = {}
+      const temp = [];
+      var tempObject = {};
       for (const item in this.items) {
         if (Object.hasOwnProperty.call(this.items, item)) {
-          temp.push(this.items[item])
+          temp.push(this.items[item]);
         }
       }
-      [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]]
-      
-      tempObject = this.convertArrayToObject(temp, 'name')
-      this.items = tempObject
+      [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]];
+
+      tempObject = this.convertArrayToObject(temp, "name");
+      this.items = tempObject;
     },
     convertArrayToObject(array, key) {
       const initialValue = {};
@@ -381,7 +381,7 @@ export default {
           [item[key]]: item,
         };
       }, initialValue);
-    }
+    },
   },
 };
 </script>
