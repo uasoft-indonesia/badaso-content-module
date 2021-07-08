@@ -7,7 +7,7 @@ use Uasoft\Badaso\Models\Permission;
 use Uasoft\Badaso\Models\Role;
 use Uasoft\Badaso\Models\RolePermission;
 
-class ContentRolePermissionsSeeder extends Seeder
+class BadasoContentRolePermissionsSeeder extends Seeder
 {
     /**
      * Auto generated seed file.

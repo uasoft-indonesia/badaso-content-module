@@ -21,7 +21,7 @@ export default {
     ContentManagementFill,
     ContentManagementRead,
   },
-  name: "BlogEntryIndex",
+  name: "ContentEntryIndex",
   data: () => ({
     globalComponentList: {},
     defaultComponent: null,

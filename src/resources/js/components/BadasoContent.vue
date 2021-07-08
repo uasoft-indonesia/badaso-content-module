@@ -210,7 +210,7 @@ export default {
         }
       }
       [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]]
-      
+
       tempObject = this.convertArrayToObject(temp, 'name')
       this.items.data = tempObject
     },
@@ -223,7 +223,7 @@ export default {
         }
       }
       [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]]
-      
+
       tempObject = this.convertArrayToObject(temp, 'name')
       this.items.data = tempObject
     },

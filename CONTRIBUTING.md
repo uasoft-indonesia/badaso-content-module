@@ -48,15 +48,16 @@ After getting the license, you can proceed to Badaso installation.
 - Root Laravel Project
   - /packages (Folder Packages)
     - /uasoft-indonesia (Folder Uasoft Indonesia)
-      - badaso (Badaso Library) 
-      - badaso-content-module (Cloud Badaso Content Manager)
+      - core (Badaso Core Library) 
+      - content-module (Cloud Badaso Content Manager)
     - ...
   - ...
 - ...
 
 cd into uasoft-indonesia directory, then run
 ```
-git clone https://github.com/uasoft-indonesia/badaso-content-module.git
+git clone https://github.com/uasoft-indonesia/badaso-content-module.git content-module
+
 ```
 
 2. Add the following Badaso provider to ```/config/app.php```.
@@ -74,14 +75,14 @@ git clone https://github.com/uasoft-indonesia/badaso-content-module.git
 "autoload": {
     "psr-4": {
         "App\\": "app/",
-        "Uasoft\\Badaso\\": "packages/uasoft-indonesia/badaso/src/",
-        "Uasoft\\Badaso\\Module\\Content\\": "packages/uasoft-indonesia/badaso-content-module/src/",
+        "Uasoft\\Badaso\\": "packages/badaso/badaso/src/",
+        "Uasoft\\Badaso\\Module\\Content\\": "packages/badaso/content-module/src/",
     },
     ...
 }
 ```
 
-5. Copy required library from ```packages/uasoft-indonesia/badaso-content-module/composer.json``` to ```/composer.json``` then ```composer install```
+5. Copy required library from ```packages/badaso/content-module/composer.json``` to ```/composer.json``` then ```composer install```
 
 6. Run the following commands in sequence.
 ```
@@ -103,13 +104,13 @@ composer dump-autoload
 ```
 9. Run command 
 ```
-php artisan db:seed --class=ContentModuleSeeder
+php artisan db:seed --class=BadasoContentModuleSeeder
 ```
 11. Open the ```env``` file then add the following lines.
 ```
 MIX_DEFAULT_MENU=admin
-MIX_BADASO_MENU=${MIX_DEFAULT_MENU},badaso-content-module
-MIX_BADASO_MODULES=badaso-content-module
+MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module
+MIX_BADASO_MODULES=content-module
 ```
 
 9. In menu item "Role Management" from badaso admin panel, add permission user to fill content
