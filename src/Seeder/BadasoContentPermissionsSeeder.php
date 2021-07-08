@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Permission;
 
-class ContentPermissionsSeeder extends Seeder
+class BadasoContentPermissionsSeeder extends Seeder
 {
     /**
      * Auto generated seed file.

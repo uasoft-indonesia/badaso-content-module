@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Menu;
 
-class ContentMenusSeeder extends Seeder
+class BadasoContentMenusSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
@@ -18,7 +18,7 @@ class ContentMenusSeeder extends Seeder
 
         try {
             $new_menus = [
-                'key' => 'badaso-content-module',
+                'key' => 'content-module',
                 'display_name' => 'Content Manager',
                 'created_at' => '2021-01-01 15:26:06',
                 'updated_at' => '2021-01-01 15:26:06',
