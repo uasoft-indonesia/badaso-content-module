@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Permission;
 use Uasoft\Badaso\Models\Role;
 use Uasoft\Badaso\Models\RolePermission;

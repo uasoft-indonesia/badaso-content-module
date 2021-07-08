@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\Permission;
 
 class BadasoContentPermissionsSeeder extends Seeder
