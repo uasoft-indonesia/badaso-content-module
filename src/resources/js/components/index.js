@@ -1,9 +1,10 @@
-import BadasoContent from "./BadasoContent.vue";
-import BadasoContentAddField from "./BadasoContentAddField.vue";
-import BadasoContentFill from "./BadasoContentFill.vue";
-import BadasoContentRead from "./BadasoContentRead.vue";
+import BadasoContent from "./BadasoContent";
+import BadasoContentAddField from "./BadasoContentAddField";
+import BadasoContentFill from "./BadasoContentFill";
+import BadasoContentRead from "./BadasoContentRead";
 
-export default {
+
+export default  {
   BadasoContent,
   BadasoContentAddField,
   BadasoContentFill,

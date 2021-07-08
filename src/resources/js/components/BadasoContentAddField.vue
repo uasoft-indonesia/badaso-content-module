@@ -70,20 +70,22 @@ export default {
       },
     },
   },
-  validations: {
-    field: {
-      type: {
-        required,
+  validations() {
+    return {
+      field: {
+        type: {
+          required,
+        },
+        label: {
+          required,
+        },
+        name: {
+          required,
+          alphaNum,
+          nonNumericOnFirstChar: nonNumericOnFirstChar(this.field.name)
+        },
       },
-      label: {
-        required,
-      },
-      name: {
-        required,
-        alphaNum,
-        nonNumericOnFirstChar: nonNumericOnFirstChar(this.name)
-      },
-    },
+    }
   },
   watch: {
     show(val) {

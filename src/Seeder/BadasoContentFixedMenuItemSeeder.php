@@ -5,7 +5,7 @@ namespace Database\Seeders\Badaso\Content;
 use Illuminate\Database\Seeder;
 use Uasoft\Badaso\Models\MenuItem;
 
-class ContentFixedMenuItemSeeder extends Seeder
+class BadasoContentFixedMenuItemSeeder extends Seeder
 {
     /**
      * Auto generated seed file.
@@ -19,7 +19,7 @@ class ContentFixedMenuItemSeeder extends Seeder
         \DB::beginTransaction();
 
         try {
-            $menus = \DB::table('menus')->where('key', 'badaso-content-module')->first();
+            $menus = \DB::table('menus')->where('key', 'content-module')->first();
             $menu_id = $menus->id;
 
             $add_menus_item = [
