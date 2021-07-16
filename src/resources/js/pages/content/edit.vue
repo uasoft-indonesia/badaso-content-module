@@ -47,12 +47,12 @@
           ></badaso-text>
         </div>
       </vs-prompt>
-      <vs-col col-lg="12" style="overflow-x: auto">
+      <vs-col col-lg="12">
         <vs-card>
           <div slot="header">
             <h3>{{ $t("content.edit.secondTitle") }}</h3>
           </div>
-          <table class="table">
+          <table class="badaso-table">
             <thead>
               <th></th>
               <th>{{ $t("content.add.field.content.label.title") }}</th>

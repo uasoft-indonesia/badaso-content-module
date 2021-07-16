@@ -48,7 +48,7 @@
           <div slot="header">
             <h3>{{ $t("content.add.secondTitle") }}</h3>
           </div>
-          <table class="table">
+          <table class="badaso-table">
             <thead>
               <th></th>
               <th>{{ $t("content.add.field.content.label.title") }}</th>

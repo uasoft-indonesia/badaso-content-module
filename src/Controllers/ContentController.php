@@ -31,10 +31,10 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'id' => 'required|string',
+                'id' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
             ]);
 
-            $content = Content::where('id', $request->id)->firstOrFail();
+            $content = Content::where('id', $request->id)->first();
 
             $data = [
                 'id'    => $content->id,
@@ -53,10 +53,10 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'slug' => 'required|string',
+                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
             ]);
 
-            $data = Content::where('slug', $request->slug)->firstOrFail();
+            $data = Content::where('slug', $request->slug)->first();
 
             $data->value = json_decode($data->value);
 
@@ -70,7 +70,7 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'slug' => 'required|string',
+                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
             ]);
 
             $slugs = explode(',', $request->slug);
@@ -96,16 +96,16 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'slug'  => 'required|string',
+                'slug'  => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
 
-            $content = new Content();
-            $content->slug = $request->slug;
-            $content->label = $request->label;
-            $content->value = $request->value;
-            $content->save();
+            Content::create([
+                'slug' => $request->slug,
+                'label' => $request->label,
+                'value' => $request->value,
+            ]);
 
             DB::commit();
 
@@ -123,8 +123,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required',
-                'slug'  => 'required|string',
+                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug'  => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -151,8 +151,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required|exists:content,id',
-                'slug'  => 'required|string|exists:content,slug',
+                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content,id',
+                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content,slug',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -195,7 +195,7 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id' => 'required',
+                'id' => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content,id',
             ]);
 
             $content = Content::where('id', $request->id)->firstOrFail();
