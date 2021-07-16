@@ -20,8 +20,6 @@ class BadasoContentMenusSeeder extends Seeder
             $new_menus = [
                 'key' => 'content-module',
                 'display_name' => 'Content Manager',
-                'created_at' => '2021-01-01 15:26:06',
-                'updated_at' => '2021-01-01 15:26:06',
             ];
 
             Menu::firstOrCreate($new_menus);
