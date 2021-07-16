@@ -26,7 +26,7 @@
               readonly
             ></badaso-text>
 
-            <table class="w-100 table">
+            <table class="badaso-table">
               <thead>
                 <th sort-key="label" style="width: 200px">
                   {{ $t("content.header.label") }}
