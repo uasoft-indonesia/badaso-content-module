@@ -6,10 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Content extends Model
 {
-    protected $table = 'content';
-    protected $fillable = [
-        'section_slug',
-        'label',
-        'value',
-    ];
+    protected $table = null;
+
+    /**
+     * Constructor for setting the table name dynamically.
+     */
+    public function __construct(array $attributes = [])
+    {
+        $prefix = config('badaso.database.prefix');
+        $this->table = $prefix.'contents';
+        parent::__construct($attributes);
+    }
+
+    protected $guarded = [];
 }

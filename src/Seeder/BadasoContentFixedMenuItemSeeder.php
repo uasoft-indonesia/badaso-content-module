@@ -3,6 +3,7 @@
 namespace Database\Seeders\Badaso\Content;
 
 use Illuminate\Database\Seeder;
+use Uasoft\Badaso\Models\Menu;
 use Uasoft\Badaso\Models\MenuItem;
 
 class BadasoContentFixedMenuItemSeeder extends Seeder
@@ -19,7 +20,7 @@ class BadasoContentFixedMenuItemSeeder extends Seeder
         \DB::beginTransaction();
 
         try {
-            $menus = \DB::table('menus')->where('key', 'content-module')->first();
+            $menus = Menu::where('key', 'content-module')->first();
             $menu_id = $menus->id;
 
             $add_menus_item = [
@@ -32,8 +33,6 @@ class BadasoContentFixedMenuItemSeeder extends Seeder
                 'parent_id' => null,
                 'order' => 2,
                 'permissions' => 'browse_content',
-                'created_at' => '2021-01-01 15:26:06',
-                'updated_at' => '2021-01-01 15:26:06',
             ];
 
             MenuItem::firstOrCreate($add_menus_item);
