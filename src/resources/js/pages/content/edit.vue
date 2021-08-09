@@ -241,7 +241,7 @@ export default {
           this.selected = [];
           this.content.label = response.data.content.label;
           this.content.slug = response.data.content.slug;
-          this.items = JSON.parse(response.data.content.value);
+          this.items = response.data.content.value;
         })
         .catch((error) => {
           this.$closeLoader();

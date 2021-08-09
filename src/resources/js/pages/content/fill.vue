@@ -160,7 +160,7 @@ export default {
           this.selected = [];
           this.content.label = response.data.content.label;
           this.content.slug = response.data.content.slug;
-          this.content.json = JSON.parse(response.data.content.value);
+          this.content.json = response.data.content.value;
         })
         .catch((error) => {
           this.$closeLoader();
