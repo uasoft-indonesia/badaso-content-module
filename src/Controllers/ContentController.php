@@ -237,13 +237,6 @@ class ContentController extends Controller
     {
         $group = (object) [];
         foreach ($data as $groupKey => $groupValue) {
-            if ($groupValue['type'] === 'image') {
-                if (isset($groupValue['data']) && is_array($groupValue['data']) && ! empty($groupValue['data'])) {
-                    $fileName = $this->handleUploadFiles($groupValue['data']);
-                    $groupValue['data'] = $fileName;
-                }
-            }
-
             if ($groupValue['type'] === 'group') {
                 $groupValue['data'] = $this->handleGroupTypeContent($groupValue['data']);
             }
