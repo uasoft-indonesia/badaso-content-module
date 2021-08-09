@@ -49,7 +49,7 @@
                     <template v-if="tr.type === 'image'">
                       <img
                         v-if="tr.data"
-                        :src="meta.mediaBaseUrl + tr.data"
+                        :src="tr.data"
                         :alt="tr.data"
                         class="image-container"
                       />
@@ -64,7 +64,7 @@
                       </vs-row>
                     </template>
                     <template v-if="tr.type === 'group'">
-                      <badaso-content-read :items="tr.data" :meta="meta"></badaso-content-read>
+                      <badaso-content-read :items="tr.data"></badaso-content-read>
                     </template>
                   </td>
                 </tr>
@@ -99,7 +99,6 @@ export default {
       slug: "",
       json: {},
     },
-    meta: {}
   }),
   mounted() {
     this.getContent();
@@ -112,12 +111,11 @@ export default {
           id: this.$route.params.id,
         })
         .then((response) => {
-          this.meta = response.meta
           this.$closeLoader();
           this.selected = [];
           this.content.label = response.data.content.label;
           this.content.slug = response.data.content.slug;
-          this.content.json = JSON.parse(response.data.content.value)
+          this.content.json = response.data.content.value;
         })
         .catch((error) => {
           this.$closeLoader();
