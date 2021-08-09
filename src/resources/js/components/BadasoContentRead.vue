@@ -22,7 +22,7 @@
           <template v-if="tr.type === 'image'">
             <img
               v-if="tr.data"
-              :src="meta.mediaBaseUrl + tr.data"
+              :src="tr.data"
               :alt="tr.data"
               class="image-container"
             />
@@ -54,10 +54,6 @@ export default {
       type: Object,
       required: true
     },
-    meta: {
-      type: Object,
-      required: true
-    }
   }
 }
 </script>
