@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Uasoft\Badaso\Helpers\ApiResponse;
 use Uasoft\Badaso\Module\Content\Models\Content;
+use Uasoft\Badaso\Rules\ExistsModel;
+use Uasoft\Badaso\Rules\UniqueModel;
 use Uasoft\Badaso\Traits\FileHandler;
 
 class ContentController extends Controller
@@ -31,7 +33,7 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'id' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'id' => ['required', 'string', new ExistsModel(Content::class, 'id')],
             ]);
 
             $content = Content::where('id', $request->id)->first();
@@ -40,7 +42,7 @@ class ContentController extends Controller
                 'id'    => $content->id,
                 'slug'  => $content->slug,
                 'label' => $content->label,
-                'value' => $content->value,
+                'value' => json_decode($content->value),
             ];
 
             return ApiResponse::success(['content' => $data]);
@@ -53,7 +55,7 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug' => ['required', 'string', new ExistsModel(Content::class, 'slug')],
             ]);
 
             $data = Content::where('slug', $request->slug)->first();
@@ -70,7 +72,7 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug' => ['required', 'string', new ExistsModel(Content::class, 'slug')],
             ]);
 
             $slugs = explode(',', $request->slug);
@@ -96,7 +98,7 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'slug'  => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug'  => ['required', 'string', new UniqueModel(Content::class, 'slug')],
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -123,8 +125,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
-                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'id'    => ['required', new ExistsModel(Content::class, 'id')],
+                'slug'  => ['required', 'string', new ExistsModel(Content::class, 'slug')],
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -151,8 +153,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content,id',
-                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content,slug',
+                'id'    => ['required', new ExistsModel(Content::class, 'id')],
+                'slug'  => ['required', 'string', new ExistsModel(Content::class, 'slug')],
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -160,12 +162,6 @@ class ContentController extends Controller
             $modifiedContent = (object) [];
 
             foreach ($collected as $key => $value) {
-                if ($value['type'] === 'image') {
-                    if (isset($value['data']) && is_array($value['data']) && ! empty($value['data'])) {
-                        $fileName = $this->handleUploadFiles($value['data']);
-                        $value['data'] = $fileName;
-                    }
-                }
                 if ($value['type'] === 'group') {
                     $value['data'] = $this->handleGroupTypeContent($value['data']);
                 }
@@ -195,7 +191,7 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id' => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'id' => ['required', new ExistsModel(Content::class, 'id')],
             ]);
 
             $content = Content::where('id', $request->id)->firstOrFail();
@@ -234,61 +230,6 @@ class ContentController extends Controller
             DB::rollBack();
 
             return ApiResponse::failed($e);
-        }
-    }
-
-    /**
-     * @param $data = [
-     *      name,
-     *      base64
-     * ];
-     *
-     * @return string $fileName
-     */
-    public function handleUploadFiles(array $data)
-    {
-        try {
-            /*
-             * Separate the base64 from its file type.
-             */
-            @[$type, $file_data] = explode(';', $data['base64']);
-
-            /*
-             * Separate the base64 from the base64 label.
-             */
-            @[, $file_data] = explode(',', $file_data);
-
-            /**
-             * Get storage/app/public path.
-             */
-            $destinationPath = storage_path('app/public/');
-
-            /**
-             * Get timestamp for unique file name.
-             */
-            $timestamp = explode('.', Carbon::now()->getPreciseTimestamp(3))[0];
-
-            /**
-             * Join the timestamp with modified file name (lowercase, remove whitespace
-             * and replace with underscore).
-             */
-            $fileName = $timestamp.'_'.strtolower(str_replace(' ', '_', $data['name']));
-
-            /*
-             * Put the file to destination path with defined filename and with base64 content.
-             */
-
-            if (config('badaso.storage.disk') == 's3') {
-                Storage::disk('s3')->put(''.$fileName, base64_decode($file_data), 'public');
-            }
-
-            if (config('badaso.storage.disk') == 'public') {
-                file_put_contents($destinationPath.$fileName, base64_decode($file_data));
-            }
-
-            return $fileName;
-        } catch (Exception $e) {
-            throw $e;
         }
     }
 
