@@ -20,6 +20,20 @@ export default {
     return resource.get(url);
   },
 
+  fetch(data) {
+    let ep = apiPrefix + "/module/content/v1/content/fetch";
+    let qs = QueryString(data);
+    let url = ep + qs;
+    return resource.get(url);
+  },
+
+  fetchMultiple(data) {
+    let ep = apiPrefix + "/module/content/v1/content/fetch-multiple";
+    let qs = QueryString(data);
+    let url = ep + qs;
+    return resource.get(url);
+  },
+
   fill(data) {
     return resource.put(apiPrefix + "/module/content/v1/content/fill", data);
   },
