@@ -122,7 +122,7 @@ class ContentController extends Controller
         try {
             $request->validate([
                 'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
-                'slug'  => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
