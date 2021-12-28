@@ -29,6 +29,7 @@ class BadasoContentModuleServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'badaso-content');
 
         $this->publishes([
+            __DIR__.'/../Config/badaso-content.php' => config_path('badaso-content.php'),
             __DIR__.'/../Swagger' => app_path('Http/Swagger/swagger_models'),
             __DIR__.'/../Seeder' => database_path('seeders/Badaso/Content'),
         ], 'badaso-content-module');
