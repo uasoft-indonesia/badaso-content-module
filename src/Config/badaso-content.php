@@ -2,7 +2,7 @@
 
 return [
     /**
-     * Overriding controllers
+     * Overriding controllers.
      */
     'controllers' => [],
 ];
