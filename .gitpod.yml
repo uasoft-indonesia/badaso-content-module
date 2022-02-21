@@ -3,14 +3,14 @@ image:
 tasks:
   - name: Starting Project
     init: composer create-project laravel/laravel:^8.0 laravel &&
-      mv {,.}* laravel/packages/badaso/badaso-content 2>/dev/null; true &&
-      mkdir -p laravel/packages/badaso/badaso-content &&
+      mv {,.}* laravel/packages/badaso/content-module 2>/dev/null; true &&
+      mkdir -p laravel/packages/badaso/content-module &&
       cd laravel/packages/badaso &&
       git clone --branch 2.x --single-branch https://github.com/uasoft-indonesia/badaso.git core &&
       cd ../../ &&
-      cp packages/badaso/badaso-content/.gitpod/app.php config/app.php &&
-      cp packages/badaso/badaso-content/.gitpod/composer.json composer.json &&
-      cp packages/badaso/badaso-content/.gitpod/webpack.mix.js webpack.mix.js &&
+      cp packages/badaso/content-module/.gitpod/app.php config/app.php &&
+      cp packages/badaso/content-module/.gitpod/composer.json composer.json &&
+      cp packages/badaso/content-module/.gitpod/webpack.mix.js webpack.mix.js &&
       cp .env.example .env &&
       sed -i "s|APP_URL=|APP_URL=${GITPOD_WORKSPACE_URL}|g" .env &&
       sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
