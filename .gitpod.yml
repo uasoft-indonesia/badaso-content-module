@@ -3,8 +3,8 @@ image:
 tasks:
   - name: Starting Project
     init: composer create-project laravel/laravel:^8.0 laravel &&
-      mv {,.}* laravel/packages/badaso/content-module 2>/dev/null; true &&
       mkdir -p laravel/packages/badaso/content-module &&
+      mv {,.}* laravel/packages/badaso/content-module 2>/dev/null; true &&
       cd laravel/packages/badaso &&
       git clone --branch 2.x --single-branch https://github.com/uasoft-indonesia/badaso.git core &&
       cd ../../ &&
