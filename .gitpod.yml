@@ -8,6 +8,7 @@ tasks:
       cd laravel/packages/badaso &&
       git clone --branch 2.x --single-branch https://github.com/uasoft-indonesia/badaso.git core &&
       cd ../../ &&
+      cp packages/badaso/core/.gitpod/AppServiceProvider.php app/Providers/AppServiceProvider.php &&
       cp packages/badaso/content-module/.gitpod/app.php config/app.php &&
       cp packages/badaso/content-module/.gitpod/composer.json composer.json &&
       cp packages/badaso/content-module/.gitpod/webpack.mix.js webpack.mix.js &&
@@ -22,7 +23,7 @@ tasks:
       sed -i "s|APP_URL=https://|APP_URL=https://8000-|g" .env &&
       sed -i 's/MIX_DEFAULT_MENU=general/MIX_DEFAULT_MENU=general,content-module/g' .env &&
       sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
-      echo -e "MIX_BADASO_MODULES=content-module" >> .env &&
+      echo -e "\nMIX_BADASO_MODULES=content-module" >> .env &&
       php artisan migrate &&
       php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
       php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
