@@ -1,6 +1,18 @@
 <template>
-  <vs-row class="mb-0" style="border-left: 5px solid var(--primary)" vs-justify="center" vs-align="center" >
-    <vs-col vs-lg="12" vs-xs="12" class="mb-0" v-for="(groupItem, index) in items" :key="index" style="padding: 0 0 0 15px" >
+  <vs-row
+    class="mb-0"
+    style="border-left: 5px solid var(--primary)"
+    vs-justify="center"
+    vs-align="center"
+  >
+    <vs-col
+      vs-lg="12"
+      vs-xs="12"
+      class="mb-0"
+      v-for="(groupItem, index) in items"
+      :key="index"
+      style="padding: 0 0 0 15px"
+    >
       <badaso-text
         v-if="groupItem.type === 'text'"
         :label="groupItem.label"
@@ -15,7 +27,12 @@
         v-model="groupItem.data"
         size="12"
       ></badaso-upload-image>
-      <vs-col class="mb-2" vs-lg="12" vs-xs="12" v-if="groupItem.type === 'url'" >
+      <vs-col
+        class="mb-2"
+        vs-lg="12"
+        vs-xs="12"
+        v-if="groupItem.type === 'url'"
+      >
         <span class="ml-1">{{ groupItem.label }}</span>
         <vs-row class="mt-2">
           <badaso-text
@@ -40,11 +57,7 @@
         vs-xs="12"
         v-if="groupItem.type === 'group'"
       >
-        <vs-row vs-justify="center" vs-align="center" class="my-2">
-          <vs-col vs-lg="12" vs-xs="12" class="p-0">
-            <h3 class="my-2">{{ groupItem.label }}</h3>
-          </vs-col>
-        </vs-row>
+        <h3 class="my-2">{{ groupItem.label }}</h3>
         <badaso-content-fill :items="groupItem.data"></badaso-content-fill>
       </vs-col>
     </vs-col>
@@ -59,7 +72,7 @@ export default {
     items: {
       type: Object,
       required: true,
-    }
-  }
-}
+    },
+  },
+};
 </script>
