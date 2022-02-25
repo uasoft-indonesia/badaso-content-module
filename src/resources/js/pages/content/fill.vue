@@ -34,38 +34,66 @@
             <h3>{{ $t("content.fill.title") }}</h3>
           </div>
           <vs-row vs-justify="center" vs-align="end">
-              <template v-for="(item, index) in content.json">
-                <!-- TEXT TYPE -->
-                <badaso-text :key="index" v-if="item.type === 'text'" :label="item.label" :placeholder="item.label" v-model="item.data" size="12" ></badaso-text>
+            <template v-for="(item, index) in content.json">
+              <!-- TEXT TYPE -->
+              <badaso-text
+                :key="index"
+                v-if="item.type === 'text'"
+                :label="item.label"
+                :placeholder="item.label"
+                v-model="item.data"
+                size="12"
+              ></badaso-text>
 
-                <!-- IMAGE TYPE -->
-                <badaso-upload-image :key="index" v-if="item.type === 'image'" :label="item.label" v-model="item.data" :placeholder="item.label" size="12" ></badaso-upload-image>
+              <!-- IMAGE TYPE -->
+              <badaso-upload-image
+                :key="index"
+                v-if="item.type === 'image'"
+                :label="item.label"
+                v-model="item.data"
+                :placeholder="item.label"
+                size="12"
+              ></badaso-upload-image>
 
-                <!-- URL TYPE -->
-                <vs-col class="mb-2" vs-lg="12" vs-xs="12" :key="index" v-if="item.type === 'url'" >
-                  <span class="ml-1">{{ item.label }}</span>
-                  <vs-row class="mt-2">
-                    <badaso-text label="Text" placeholder="Text" v-model="item.data.text" size="6" class="pr-2 p-0" ></badaso-text>
-                    <badaso-text label="URL" placeholder="URL" v-model="item.data.url" size="6" class="p-0" ></badaso-text>
-                  </vs-row>
-                </vs-col>
+              <!-- URL TYPE -->
+              <vs-col
+                class="mb-2"
+                vs-lg="12"
+                vs-xs="12"
+                :key="index"
+                v-if="item.type === 'url'"
+              >
+                <span class="ml-1">{{ item.label }}</span>
+                <vs-row class="mt-2">
+                  <badaso-text
+                    label="Text"
+                    placeholder="Text"
+                    v-model="item.data.text"
+                    size="6"
+                    class="pr-2 p-0"
+                  ></badaso-text>
+                  <badaso-text
+                    label="URL"
+                    placeholder="URL"
+                    v-model="item.data.url"
+                    size="6"
+                    class="p-0"
+                  ></badaso-text>
+                </vs-row>
+              </vs-col>
 
-                <!-- GROUP TYPE -->
-                <vs-col
-                  :key="index"
-                  vs-lg="12"
-                  vs-xs="12"
-                  v-if="item.type === 'group'"
-                >
-                  <vs-row vs-justify="center" vs-align="center" class="my-2">
-                    <vs-col vs-lg="12" vs-xs="12" class="p-0">
-                      <h3 class="my-2">{{ item.label }}</h3>
-                    </vs-col>
-                  </vs-row>
-                  <badaso-content-fill :items="item.data"></badaso-content-fill>
-                </vs-col>
-              </template>
-            </vs-row>
+              <!-- GROUP TYPE -->
+              <vs-col
+                :key="index"
+                vs-lg="12"
+                vs-xs="12"
+                v-if="item.type === 'group'"
+              >
+                <h3 class="my-2">{{ item.label }}</h3>
+                <badaso-content-fill :items="item.data"></badaso-content-fill>
+              </vs-col>
+            </template>
+          </vs-row>
         </vs-card>
       </vs-col>
       <vs-col vs-lg="12">
@@ -122,7 +150,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.$openLoader()
+      this.$openLoader();
       this.$api.badasoContent
         .fill({
           id: this.$route.params.id,
@@ -149,7 +177,7 @@ export default {
         });
     },
     getContent() {
-      this.$openLoader()
+      this.$openLoader();
       this.$api.badasoContent
         .read({
           id: this.$route.params.id,
@@ -183,19 +211,19 @@ export default {
       }
     },
     addNewItem(parent, value) {
-      if (Object.values(value)[0].type === 'url') {
+      if (Object.values(value)[0].type === "url") {
         Object.values(value)[0].data = {
           url: "",
-          text: ""
-        }
+          text: "",
+        };
       }
 
-      if (Object.values(value)[0].type === 'text') {
-        Object.values(value)[0].data = ""
+      if (Object.values(value)[0].type === "text") {
+        Object.values(value)[0].data = "";
       }
 
-      if (Object.values(value)[0].type === 'image') {
-        Object.values(value)[0].data = null
+      if (Object.values(value)[0].type === "image") {
+        Object.values(value)[0].data = null;
       }
 
       this.$set(parent, Object.keys(value), Object.values(value)[0]);
