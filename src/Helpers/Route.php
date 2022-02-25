@@ -8,7 +8,7 @@ class Route
     {
         // get config 'controllers' from config/badaso-content.php
         $controllers = config('badaso-content.controllers');
-
+        
         // if the key is not found, return $key
         if (! isset($controllers[$key])) {
             return 'Uasoft\\Badaso\\Module\\Content\\Controllers\\'.$key;

@@ -36,6 +36,11 @@
       "Uasoft\\Badaso\\Module\\Content\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Uasoft\\Badaso\\Module\\Content\\": "tests/"
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
