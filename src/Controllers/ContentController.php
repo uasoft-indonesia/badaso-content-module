@@ -77,7 +77,7 @@ class ContentController extends Controller
             $data = [];
 
             foreach ($items as $key => $item) {
-                $data[] =json_decode($item->value);
+                $data[] = json_decode($item->value);
             }
 
             return ApiResponse::success($data);
