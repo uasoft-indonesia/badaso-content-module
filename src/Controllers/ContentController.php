@@ -68,21 +68,19 @@ class ContentController extends Controller
     {
         try {
             $request->validate([
-                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug' => 'required|string',
             ]);
 
             $slugs = explode(',', $request->slug);
 
             $items = Content::whereIn('slug', $slugs)->get();
-
             $data = [];
 
             foreach ($items as $key => $item) {
-                $data = $item;
-                $data->value = json_decode($item->value);
+                $data[] =json_decode($item->value);
             }
 
-            return ApiResponse::success($data->toArray());
+            return ApiResponse::success($data);
         } catch (Exception $e) {
             return ApiResponse::failed($e);
         }
