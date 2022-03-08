@@ -2,7 +2,7 @@
 
 /**
  * @OA\Get(
- *      path="module/content/v1/content",
+ *      path="/module/content/v1/content",
  *      operationId="browseModuleContentV1Content",
  *      tags={"content"},
  *      summary="Browse Content",
@@ -19,7 +19,7 @@
 
 /**
  * @OA\Get(
- *      path="module/content/v1/content/read",
+ *      path="/module/content/v1/content/read",
  *      operationId="browseModuleContentV1ContentRead",
  *      tags={"content"},
  *      summary="Read Content",
@@ -44,7 +44,7 @@
 
  /**
   * @OA\Get(
-  *      path="module/content/v1/content/fetch",
+  *      path="/module/content/v1/content/fetch",
   *      operationId="browseModuleContentV1ContentFetch",
   *      tags={"content"},
   *      summary="Fetch Content",
@@ -66,7 +66,7 @@
 
  /**
   * @OA\Get(
-  *      path="module/content/v1/content/fetch-multiple",
+  *      path="/module/content/v1/content/fetch-multiple",
   *      operationId="browseModuleContentV1ContentFetchMultiple",
   *      tags={"content"},
   *      summary="Fetch Multiple Content",
