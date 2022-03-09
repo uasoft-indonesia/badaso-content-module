@@ -211,13 +211,13 @@ class BadasoContentApiTest extends TestCase
         ];
             $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/edit'), $request_data);
             $response->assertSuccessful();
-        // $table = Content::latest()->first();
+            
+        $table = Content::where('value', $request_data['value'])->get();
 
         $this->assertTrue($table->slug == $request_data['slug']);
         $this->assertTrue($table->label == $request_data['label']);
 
-        $tables = Content::where('value', $request_data['value'])->get();
-        dd($tables);
+        dd($table);
         $this->assertTrue($response['message'] == 'Request was successful');
     }
 
