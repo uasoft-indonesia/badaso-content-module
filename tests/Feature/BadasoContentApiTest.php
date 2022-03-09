@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Uasoft\Badaso\Module\Content\Tests\Feature;
 
 use Tests\TestCase;
 use Uasoft\Badaso\Helpers\CallHelperTest;
