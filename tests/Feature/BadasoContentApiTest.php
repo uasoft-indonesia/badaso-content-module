@@ -213,11 +213,11 @@ class BadasoContentApiTest extends TestCase
             $response->assertSuccessful();
             
         $table = Content::where('value', $request_data['value'])->get();
-
+ dd($table);
         $this->assertTrue($table[0]->slug == $request_data['slug']);
         $this->assertTrue($table[0]->label == $request_data['label']);
 
-        dd($table);
+       
         $this->assertTrue($response['message'] == 'Request was successful');
     }
 
