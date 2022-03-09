@@ -215,6 +215,7 @@ class BadasoContentApiTest extends TestCase
 
         $this->assertTrue($table->slug == $request_data['slug']);
         $this->assertTrue($table->label == $request_data['label']);
+        dd($table->value,$request_data['value']);
         $this->assertTrue($table->value == $request_data['value']);
         $this->assertTrue($response['message'] == 'Request was successful');
     }
