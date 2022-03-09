@@ -17,6 +17,11 @@ class BadasoContentApiTest extends TestCase
      *
      * @return void
      */
+    public static function getContentApiV1($path)
+    {
+        return 'badaso-api/module/content/v1'.$path;
+    }
+    
      public function test_add(){
         $token = CallHelperTest::login($this);
         for ($i=0; $i < 4 ; $i++) { 
@@ -77,7 +82,7 @@ class BadasoContentApiTest extends TestCase
             }',
         ]; 
         
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("POST", CallHelperTest::getContentApiV1('/content/add'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("POST", $this->getContentApiV1('/content/add'), $request_data);
         $response->assertSuccessful();
         $this->assertTrue($response['message'] == "Request was successful");
         }
@@ -89,7 +94,7 @@ class BadasoContentApiTest extends TestCase
     {
         $token = CallHelperTest::login($this);
 
-        $response = $this->withHeader("Authorization", "Bearer $token")->json("GET", CallHelperTest::getContentApiV1("/content"));
+        $response = $this->withHeader("Authorization", "Bearer $token")->json("GET", $this->getContentApiV1("/content"));
         $response->assertSuccessful();
         
         
@@ -111,7 +116,7 @@ class BadasoContentApiTest extends TestCase
             'id' => "$request_data->id"
         ];
         
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("GET", CallHelperTest::getContentApiV1("/content/read"),$request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("GET", $this->getContentApiV1("/content/read"),$request_data);
         
         $response->assertSuccessful();
 
@@ -135,7 +140,7 @@ class BadasoContentApiTest extends TestCase
     public function test_fetch(){
         $request_data = Content::latest()->first();
         $request_data = ['slug'=>$request_data->slug];
-        $response = $this->json("GET", CallHelperTest::getContentApiV1("/content/fetch"),$request_data);
+        $response = $this->json("GET", $this->getContentApiV1("/content/fetch"),$request_data);
         $response->assertSuccessful();
               
         $response = $response->json('data');
@@ -213,7 +218,7 @@ class BadasoContentApiTest extends TestCase
                 }
             }',
         ];
-            $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", CallHelperTest::getContentApiV1('/content/edit'), $request_data);
+            $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/edit'), $request_data);
             $response->assertSuccessful();
             $table = Content::latest()->first();
 
@@ -284,7 +289,7 @@ class BadasoContentApiTest extends TestCase
                                 ],],];
                     
                     
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", CallHelperTest::getContentApiV1('/content/fill'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/fill'), $request_data);
         $response->assertSuccessful();
 
         $table = Content::latest()->first();
@@ -338,7 +343,7 @@ class BadasoContentApiTest extends TestCase
         }
         
         $request_data = ['slug'=>join(",",$slug)];
-        $response = $this->json("GET", CallHelperTest::getContentApiV1("/content/fetch-multiple"),$request_data);
+        $response = $this->json("GET", $this->getContentApiV1("/content/fetch-multiple"),$request_data);
         $response->assertSuccessful();
 
         $response = $response->json('data');
@@ -394,7 +399,7 @@ class BadasoContentApiTest extends TestCase
         $request_data = [
             "id" => $table->id
         ];
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", CallHelperTest::getContentApiV1('/content/delete'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", $this->getContentApiV1('/content/delete'), $request_data);
         $response->assertSuccessful();
         $table = Content::find($table->id);
         $this->assertTrue($table == null);
@@ -410,9 +415,10 @@ class BadasoContentApiTest extends TestCase
             "ids" => join(',', $ids)
         ];
         
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", CallHelperTest::getContentApiV1('/content/delete-multiple'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", $this->getContentApiV1('/content/delete-multiple'), $request_data);
         $response->assertSuccessful();
-        $table = Content::all()->count();
-        $this->assertEmpty($table);
+        $table = Content::whereIn('id', $ids)->get();
+        $table_count = $table->count();
+        $this->assertTrue($table_count == 0);
     }
 }  
