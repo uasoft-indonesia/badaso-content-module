@@ -93,7 +93,7 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
-          echo -e "\nMIX_BADASO_MODULES=content-module" >> .env &&
+          echo -e "\nMIX_BADASO_MODULES=content-module" >> .env 
 
       # Mysql | Badaso Post Module test
       - name: Mysql | Badaso Post Module test
@@ -116,7 +116,7 @@ jobs:
           php artisan db:wipe &&
           php artisan migrate &&
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
-          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
+          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
 
       # Sqlite | Badaso Post Module test
       - name: Sqlite | Badaso Post Module test
@@ -141,7 +141,7 @@ jobs:
           php artisan db:wipe &&
           php artisan migrate &&
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
-          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
+          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
           
       # Pgsql | Badaso Post Module test
       - name: Pgsql | Badaso Post Module test
