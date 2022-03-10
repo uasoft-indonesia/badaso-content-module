@@ -317,7 +317,7 @@ class BadasoContentApiTest extends TestCase
                 $request_data_array = $request_data['value'][$key];
                 if (isset($request_data_array['data']) && $request_data_array['type'] != 'group') {
                     if (isset($request_data_array['data']['url'])) {
-                        dd($request_data_array['data']['url'] , $tab['data']['url']);
+                        dd($request_data_array ,"\n", $tab);
                         $this->assertTrue($request_data_array['data']['url'] == $tab['data']['url']);
                         $this->assertTrue($request_data_array['data']['text'] == $tab['data']['text']);
                     } elseif ($request_data_array['type'] == 'image') {
