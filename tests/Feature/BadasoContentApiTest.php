@@ -236,10 +236,11 @@ class BadasoContentApiTest extends TestCase
     {
         $token = CallHelperTest::login($this);
         $table = Content::latest()->get();
+        dd($table);
             $request_data = [
-                'id' => $table['id'],
-                'slug' => $table['slug'],
-                'label' => $table['label'],
+                'id' => $table->id,
+                'slug' => $table->slug,
+                'label' => $table->label,
                 'value' => [
                     "textedit" => [
                         "name" =>"textedit",
