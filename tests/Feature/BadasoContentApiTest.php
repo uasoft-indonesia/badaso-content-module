@@ -235,12 +235,11 @@ class BadasoContentApiTest extends TestCase
     public function test_fill()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::latest()->limit(3)->get();
-        foreach ($table as $key => $value) {
+        $table = Content::latest()->get();
             $request_data = [
-                'id' => $value->id,
-                'slug' => $value->slug,
-                'label' => $value->label,
+                'id' => $table->id,
+                'slug' => $table->slug,
+                'label' => $table->label,
                 'value' => [
                     "textedit" => [
                         "name" =>"textedit",
@@ -296,7 +295,6 @@ class BadasoContentApiTest extends TestCase
             $response->assertSuccessful();
 
             $table = Content::latest()->first();
-            dd($table);
             $table_data_value = json_decode($table->value, true);
             foreach ($table_data_value as $key => $tab) {
                 if ($tab['type'] == 'group') {
@@ -331,7 +329,6 @@ class BadasoContentApiTest extends TestCase
                 }
                 }
             }
-        }
     }
 
     public function test_fetch_multiple()
