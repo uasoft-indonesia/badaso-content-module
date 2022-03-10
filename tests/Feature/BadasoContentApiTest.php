@@ -217,7 +217,13 @@ class BadasoContentApiTest extends TestCase
         $request_data = json_decode($request_data['value'], true);
         foreach ($table as $key => $value) {
             if($request_data[$key]){
-                dd($request_data[$key]['name'],$value);
+                $this->assertTrue($request_data[$key]['name'] == $value->name);
+                $this->assertTrue($request_data[$key]['type'] == $value->type);
+                $this->assertTrue($request_data[$key]['label'] == $value->label);
+                if ($value->data['url']) {
+                    $this->assertTrue($request_data[$key]['data']['url'] == $value->data['url']);
+                    $this->assertTrue($request_data[$key]['data']['text'] == $value->data['text']);
+                }
             }
         }
 
