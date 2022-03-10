@@ -299,8 +299,8 @@ class BadasoContentApiTest extends TestCase
             $table_data_value = json_decode($table->value, true);
             foreach ($table_data_value as $key => $tab) {
                 if ($tab['type'] == 'group') {
-                    if ($request_data['value'][$tab['type']]['data']) {
-                        foreach ($request_data['value'][$tab['type']]['data'] as $key => $value) {
+                    if ($request_data['value'][$key]['data']) {
+                        foreach ($request_data['value'][$key]['data'] as $key => $value) {
                             if ($tab['data'][$value['name']]) {
                                 if ($value['type'] == 'url') {
                                     $this->assertTrue($value['data']['url'] == $tab['data'][$value['name']]['data']['url']);
@@ -317,7 +317,6 @@ class BadasoContentApiTest extends TestCase
                 $request_data_array = $request_data['value'][$key];
                 if (isset($request_data_array['data']) && $request_data_array['type'] != 'group') {
                     if (isset($request_data_array['data']['url'])) {
-                        dd($request_data_array ,"\n", $tab);
                         $this->assertTrue($request_data_array['data']['url'] == $tab['data']['url']);
                         $this->assertTrue($request_data_array['data']['text'] == $tab['data']['text']);
                     } elseif ($request_data_array['type'] == 'image') {
@@ -354,8 +353,8 @@ class BadasoContentApiTest extends TestCase
             $table_data_value = json_decode($table_data->value, true);
             foreach ($table_data_value as $key => $tab) {
                 if ($tab['type'] == 'group') {
-                    if ($table_data_value[$tab['type']]['data']) {
-                        foreach ($table_data_value[$tab['type']]['data'] as $key => $value) {
+                    if ($table_data_value[$key]['data']) {
+                        foreach ($table_data_value[$key]['data'] as $key => $value) {
                             if ($tab['data'][$value['name']]) {
                                 if ($value['type'] == 'url') {
                                     $this->assertTrue($value['data']['url'] == $tab['data'][$value['name']]['data']['url']);
