@@ -282,15 +282,7 @@ class BadasoContentApiTest extends TestCase
                                     'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
                                     'text' => 'this is url in group url',
                                 ],
-                                "url"=>[
-                                    "name"=>"url",
-                                    "label"=>"url",
-                                    "type"=>"url",
-                                    "data"=>[
-                                        'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
-                                        'text' => 'this is url in group url',
-                                    ]
-                                ],"image"=>[
+                                "image"=>[
                                     "name"=>"img",
                                     "label"=>"img",
                                     "type"=>"image",
