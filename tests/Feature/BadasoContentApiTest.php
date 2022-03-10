@@ -366,6 +366,7 @@ class BadasoContentApiTest extends TestCase
                         }
                     }
                 } else {
+                    dd($value,$tab);
                     $respon_data_array = $tab[$key];
                     if (isset($respon_data_array['data'])) {
                         if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
