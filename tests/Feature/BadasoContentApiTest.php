@@ -220,11 +220,12 @@ class BadasoContentApiTest extends TestCase
                 $this->assertTrue($request_data[$key]['name'] == $value['name']);
                 $this->assertTrue($request_data[$key]['type'] == $value['type']);
                 $this->assertTrue($request_data[$key]['label'] == $value['label']);
-                if ($value['data']['url']) {
+                if ($value['type'] == 'url') {
                     $this->assertTrue($request_data[$key]['data']['url'] == $value['data']['url']);
                     $this->assertTrue($request_data[$key]['data']['text'] == $value['data']['text']);
+                }else{
+                    $this->assertTrue($request_data[$key]['data'] == $value['data']);
                 }
-                
             }
         }
 
@@ -326,7 +327,7 @@ class BadasoContentApiTest extends TestCase
                             }
                         }
                     }
-                }
+                }else{
                 $request_data_array = $request_data['value'][$key];
                 if (isset($request_data_array['data']) && $request_data_array['type'] != 'group') {
                     if (isset($request_data_array['data']['url'])) {
@@ -340,6 +341,7 @@ class BadasoContentApiTest extends TestCase
                     } else {
                         $this->assertTrue($request_data_array['data'] == $tab['data']);
                     }
+                }
                 }
             }
         }
