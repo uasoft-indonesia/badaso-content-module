@@ -268,7 +268,7 @@ class BadasoContentApiTest extends TestCase
                         "type"=>"group",
                         "data"=>[
                             'text'=>[
-                                'name'=>'text',
+                                'name'=>'thistext',
                                 'label'=>'text',
                                 'type'=>'text',
                                 'data'=>'this is value in group text',
@@ -366,6 +366,7 @@ class BadasoContentApiTest extends TestCase
                         }
                     }
                 } 
+                    dd($value,$tab);
                     $respon_data_array = $tab['data'][$key];
                     if (isset($respon_data_array['data'])) {
                         if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
