@@ -235,8 +235,7 @@ class BadasoContentApiTest extends TestCase
     public function test_fill()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::latest()->get();
-        dd($table);
+        $table = Content::latest()->first();
             $request_data = [
                 'id' => $table->id,
                 'slug' => $table->slug,
