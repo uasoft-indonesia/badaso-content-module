@@ -153,9 +153,7 @@ class BadasoContentApiTest extends TestCase
     public function test_edit()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::latest()->limit(2)->get();
-        foreach ($table as $key => $value) {
-         
+        $table = Content::latest()->first();
         $request_data = [
             'id' => $table->id,
             'slug' => $table->slug,
@@ -233,7 +231,6 @@ class BadasoContentApiTest extends TestCase
 
         $this->assertTrue($response['message'] == 'Request was successful');
     }
-        }
 
     public function test_fill()
     {
@@ -349,6 +346,7 @@ class BadasoContentApiTest extends TestCase
         $response = $response->json('data');
         $table = Content::latest()->limit(2)->get();
         foreach ($response as $index => $value) {
+            dd($index);
             $str_slug = $slug[$index];
             $table_data = $table->where('slug', $str_slug)->first();
             $table_data_value = json_decode($table_data->value, true);
