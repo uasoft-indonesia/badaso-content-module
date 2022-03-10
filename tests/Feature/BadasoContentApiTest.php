@@ -214,9 +214,8 @@ class BadasoContentApiTest extends TestCase
             
         $table = Content::latest()->first();
         $table = json_decode($table->value, true);
-        dd($table);
         foreach ($table as $key => $value) {
-            dd($key, $value, $table->value);
+            dd($key);
             if($table->value == $key){
 
             }
