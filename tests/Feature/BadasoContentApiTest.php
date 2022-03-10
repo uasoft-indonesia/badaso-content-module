@@ -296,6 +296,7 @@ class BadasoContentApiTest extends TestCase
             $response->assertSuccessful();
 
             $table = Content::latest()->first();
+            dd($table);
             $table_data_value = json_decode($table->value, true);
             foreach ($table_data_value as $key => $tab) {
                 if ($tab['type'] == 'group') {
