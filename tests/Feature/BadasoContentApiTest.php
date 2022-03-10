@@ -54,7 +54,7 @@ class BadasoContentApiTest extends TestCase
                     "type":"group",
                     "data":{
                         "text":{
-                            "name":"thistext",
+                            "name":"text",
                             "label":"text",
                             "type":"text",
                             "data":""
@@ -367,7 +367,7 @@ class BadasoContentApiTest extends TestCase
                     }
                 } 
                     dd($value,$tab);
-                    $respon_data_array = $value[$key];
+                    $respon_data_array = $value['data'][$key];
                     if (isset($respon_data_array['data'])) {
                         if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
                             $this->assertTrue($respon_data_array['data']['url'] == $tab['data']['url']);
