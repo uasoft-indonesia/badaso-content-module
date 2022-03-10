@@ -213,8 +213,7 @@ class BadasoContentApiTest extends TestCase
             $response->assertSuccessful();
             
         $table = Content::latest()->first();
-        dd($request_data['value']);
-        foreach ($request_data['value'] as $key => $value) {
+        foreach ($table as $key => $value) {
             dd($key, $value, $table->value);
             if($table->value == $key){
 
