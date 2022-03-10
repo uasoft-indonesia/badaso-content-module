@@ -220,10 +220,11 @@ class BadasoContentApiTest extends TestCase
                 $this->assertTrue($request_data[$key]['name'] == $value['name']);
                 $this->assertTrue($request_data[$key]['type'] == $value['type']);
                 $this->assertTrue($request_data[$key]['label'] == $value['label']);
-                if ($value->data['url']) {
+                if ($value['data']['url']) {
                     $this->assertTrue($request_data[$key]['data']['url'] == $value['data']['url']);
                     $this->assertTrue($request_data[$key]['data']['text'] == $value['data']['text']);
                 }
+                
             }
         }
 
