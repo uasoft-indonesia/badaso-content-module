@@ -369,7 +369,7 @@ class BadasoContentApiTest extends TestCase
                     $respon_data_array = $value;
                     if (isset($respon_data_array['data'])) {
                         if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
-                          dd($respon_data_array['data'] == $tab['data']);
+                          dd($respon_data_array['data'], $tab['data']);
                             $this->assertTrue($respon_data_array['data']['url'] == $tab['data']['url']);
                             if (isset($tab['data']['text'])) {
                                 $this->assertTrue($respon_data_array['data']['text'] == $tab['data']['text']);
