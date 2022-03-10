@@ -229,9 +229,6 @@ class BadasoContentApiTest extends TestCase
             }
         }
 
-        $this->assertTrue($table[0]->slug == $request_data['slug']);
-        $this->assertTrue($table[0]->label == $request_data['label']);
-
         $this->assertTrue($response['message'] == 'Request was successful');
     }
 
@@ -245,34 +242,34 @@ class BadasoContentApiTest extends TestCase
                 'slug' => $value->slug,
                 'label' => $value->label,
                 'value' => [
-                    'text' => [
-                        'name' => 'text',
-                        'label' => 'this-is-text-label',
-                        'type' => 'text',
+                    "textedit" => [
+                        "name" =>"textedit",
+                        "label" =>"texteditlabel",
+                        "type" =>"text",
                         'data' => 'this is value text',
                     ],
-                    'image' => [
-                        'name' => 'image',
-                        'label' => 'this-is-image-label',
-                        'type' => 'image',
+                        "imageedit"=>[
+                        "name"=>"imageedit",
+                        "label"=>"imageeditlabel",
+                        "type"=>"image",
                         'data' => 'News baru (1).jpg',
                     ],
-                    'url' => [
-                        'name' => 'url',
-                        'label' => 'this-is-url-label',
-                        'type' => 'url',
-                        'data' =>[
+                        "urledit"=>[
+                        "name"=>"urledit",
+                        "label"=>"urleditlabel",
+                        "type"=>"url",
+                        "data"=>[
                             'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
                             'text' => '405 not permission',
                         ],
                     ],
-                    'group'=>[
-                        'name'=>'group',
-                        'label'=>'this-is-group',
-                        'type'=>'group',
-                        'data'=>[
+                        "groupedit"=>[
+                        "name"=>"groupedit",
+                        "label"=>"groupeditlabel",
+                        "type"=>"group",
+                        "data"=>[
                             'text'=>[
-                                'name'=>'xxx',
+                                'name'=>'text',
                                 'label'=>'text',
                                 'type'=>'text',
                                 'data'=>'this is value in group text',
@@ -294,8 +291,8 @@ class BadasoContentApiTest extends TestCase
                                         'text' => 'this is url in group url',
                                     ]
                                 ],"image"=>[
-                                    "name"=>"image",
-                                    "label"=>"image",
+                                    "name"=>"img",
+                                    "label"=>"img",
                                     "type"=>"image",
                                     "data"=>"News baru (1).jpg"
                                 ],
