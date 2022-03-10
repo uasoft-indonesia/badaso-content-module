@@ -345,6 +345,7 @@ class BadasoContentApiTest extends TestCase
 
         $response = $response->json('data');
         $table = Content::latest()->limit(2)->get();
+        dd($response);
         foreach ($response as $index => $value) {
             $str_slug = $slug[$index];
             $table_data = $table->where('slug', $str_slug)->first();
@@ -366,7 +367,6 @@ class BadasoContentApiTest extends TestCase
                         }
                     }
                 } else {
-                    dd($value);
                     $respon_data_array = $value[$key];
                     if (isset($respon_data_array['data'])) {
                         if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
