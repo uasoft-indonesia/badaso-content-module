@@ -299,11 +299,8 @@ class BadasoContentApiTest extends TestCase
                                 ],
                                 ],],],];
                     
-                    
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/fill'), $request_data);
-        $response->assertSuccessful();
-
-            $response = $this->withHeader('Authorization', "Bearer $token")->json('PUT', CallHelperTest::getContentApiV1('/content/fill'), $request_data);
+                        
+            $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/fill'), $request_data);
             $response->assertSuccessful();
 
             $table = Content::latest()->first();
@@ -328,6 +325,7 @@ class BadasoContentApiTest extends TestCase
                 $request_data_array = $request_data['value'][$key];
                 if (isset($request_data_array['data']) && $request_data_array['type'] != 'group') {
                     if (isset($request_data_array['data']['url'])) {
+                        dd($request_data_array['data']['url'] , $tab['data']['url']);
                         $this->assertTrue($request_data_array['data']['url'] == $tab['data']['url']);
                         $this->assertTrue($request_data_array['data']['text'] == $tab['data']['text']);
                     } elseif ($request_data_array['type'] == 'image') {
