@@ -74,7 +74,7 @@ jobs:
           composer show laravel/framework &&
           php artisan db:wipe
 
-      # Laravel require badaso core and badaso post module
+      # Laravel require badaso core and badaso content module
       - name: Laravel file configuration
         run: git branch &&
           cd laravel &&
@@ -95,8 +95,8 @@ jobs:
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
           echo -e "\nMIX_BADASO_MODULES=content-module" >> .env 
 
-      # Mysql | Badaso Post Module test
-      - name: Mysql | Badaso Post Module test
+      # Mysql | Badaso Content Module test
+      - name: Mysql | Badaso Content Module test
         run: cd laravel && php artisan test
 
       # Sqlite | Laravel configuration
@@ -118,8 +118,8 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
 
-      # Sqlite | Badaso Post Module test
-      - name: Sqlite | Badaso Post Module test
+      # Sqlite | Badaso Content Module test
+      - name: Sqlite | Badaso Content Module test
         run: cd laravel && php artisan test
 
       # Pgsql | Laravel configuration
@@ -143,6 +143,6 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
           
-      # Pgsql | Badaso Post Module test
-      - name: Pgsql | Badaso Post Module test
+      # Pgsql | Badaso Content Module test
+      - name: Pgsql | Badaso Content Module test
         run: cd laravel && php artisan test
