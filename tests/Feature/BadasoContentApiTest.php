@@ -209,10 +209,10 @@ class BadasoContentApiTest extends TestCase
                 }
             }',
         ];
-            $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/edit'), $request_data);
-            $response->assertSuccessful();
+        $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/edit'), $request_data);
+        $response->assertSuccessful();
             
-        $table = Content::latest()->first();
+        $table = Content::latest()->orderBy('id', 'asc')->first();
         $table = json_decode($table->value, true);
         $request_data = json_decode($request_data['value'], true);
         foreach ($table as $key => $value) {
@@ -235,7 +235,7 @@ class BadasoContentApiTest extends TestCase
     public function test_fill()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::latest()->first();
+        $table = Content::orderBy('id','asc')->latest()->first();
             $request_data = [
                 'id' => $table->id,
                 'slug' => $table->slug,
@@ -294,7 +294,7 @@ class BadasoContentApiTest extends TestCase
             $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/fill'), $request_data);
             $response->assertSuccessful();
 
-            $table = Content::latest()->first();
+            $table = Content::orderBy('id','asc')->latest()->first();
             $table_data_value = json_decode($table->value, true);
             foreach ($table_data_value as $key => $tab) {
                 if ($tab['type'] == 'group') {
@@ -321,7 +321,6 @@ class BadasoContentApiTest extends TestCase
                     } elseif ($request_data_array['type'] == 'image') {
                         if ($request_data_array['data'] == $tab['data']) {
                             $this->assertTrue($request_data_array['data'] == $tab['data']);
-                        } else {
                         }
                     } else {
                         $this->assertTrue($request_data_array['data'] == $tab['data']);
@@ -365,13 +364,13 @@ class BadasoContentApiTest extends TestCase
                             }
                         }
                     }
-                } 
-                    $respon_data_array = $value;
+                } else {
+                    $respon_data_array = $value[$key];
                     if (isset($respon_data_array['data'])) {
-                        if (isset($respon_data_array['data']['url']) && isset($tab['data']['url']['data']['url'])) {
-                            $this->assertTrue($respon_data_array['data']['url'] == $tab['data']['url']['data']['url']);
+                        if (isset($respon_data_array['data']['url']) && isset($tab['data']['url'])) {
+                            $this->assertTrue($respon_data_array['data']['url'] == $tab['data']['url']);
                             if (isset($tab['data']['text'])) {
-                                $this->assertTrue($respon_data_array['data']['text'] == $tab['data']['url']['data']['text']);
+                                $this->assertTrue($respon_data_array['data']['text'] == $tab['data']['text']);
                             }
                         } elseif ($respon_data_array['type'] == 'image' && $tab['type'] == 'image') {
                             $this->assertTrue($respon_data_array['data'] == '/storage/'.$tab['data']);
@@ -382,6 +381,7 @@ class BadasoContentApiTest extends TestCase
                             }
                         }
                     }
+                }
             }
         }
     }
