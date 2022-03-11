@@ -17,8 +17,9 @@ class BadasoContentApiTest extends TestCase
     {
         return 'badaso-api/module/content/v1'.$path;
     }
-    
-     public function test_add(){
+
+    public function test_add()
+    {
         $token = CallHelperTest::login($this);
         for ($i = 0; $i < 4; $i++) {
             $slug = 'This is Slug'."$i";
@@ -76,11 +77,11 @@ class BadasoContentApiTest extends TestCase
                     }
                 }
             }',
-        ]; 
-        
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("POST", $this->getContentApiV1('/content/add'), $request_data);
-        $response->assertSuccessful();
-        $this->assertTrue($response['message'] == "Request was successful");
+            ];
+
+            $response = $this->withHeader('Authorization', "Bearer $token")->json('POST', $this->getContentApiV1('/content/add'), $request_data);
+            $response->assertSuccessful();
+            $this->assertTrue($response['message'] == 'Request was successful');
         }
     }
 
@@ -88,7 +89,7 @@ class BadasoContentApiTest extends TestCase
     {
         $token = CallHelperTest::login($this);
 
-        $response = $this->withHeader("Authorization", "Bearer $token")->json("GET", $this->getContentApiV1("/content"));
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('GET', $this->getContentApiV1('/content'));
         $response->assertSuccessful();
 
         $response = $response->json('data');
@@ -109,9 +110,9 @@ class BadasoContentApiTest extends TestCase
         $request_data = [
             'id' => "$request_data->id",
         ];
-        
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("GET", $this->getContentApiV1("/content/read"),$request_data);
-        
+
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('GET', $this->getContentApiV1('/content/read'), $request_data);
+
         $response->assertSuccessful();
 
         $response = $response->json('data.content');
@@ -134,7 +135,7 @@ class BadasoContentApiTest extends TestCase
     {
         $request_data = Content::latest()->first();
         $request_data = ['slug'=>$request_data->slug];
-        $response = $this->json("GET", $this->getContentApiV1("/content/fetch"),$request_data);
+        $response = $this->json('GET', $this->getContentApiV1('/content/fetch'), $request_data);
         $response->assertSuccessful();
 
         $response = $response->json('data');
@@ -209,21 +210,21 @@ class BadasoContentApiTest extends TestCase
                 }
             }',
         ];
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/edit'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('PUT', $this->getContentApiV1('/content/edit'), $request_data);
         $response->assertSuccessful();
-            
+
         $table = Content::latest()->orderBy('id', 'asc')->first();
         $table = json_decode($table->value, true);
         $request_data = json_decode($request_data['value'], true);
         foreach ($table as $key => $value) {
-            if($request_data[$key]){
+            if ($request_data[$key]) {
                 $this->assertTrue($request_data[$key]['name'] == $value['name']);
                 $this->assertTrue($request_data[$key]['type'] == $value['type']);
                 $this->assertTrue($request_data[$key]['label'] == $value['label']);
                 if ($value['type'] == 'url') {
                     $this->assertTrue($request_data[$key]['data']['url'] == $value['data']['url']);
                     $this->assertTrue($request_data[$key]['data']['text'] == $value['data']['text']);
-                }else{
+                } else {
                     $this->assertTrue($request_data[$key]['data'] == $value['data']);
                 }
             }
@@ -235,84 +236,83 @@ class BadasoContentApiTest extends TestCase
     public function test_fill()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::orderBy('id','asc')->latest()->first();
-            $request_data = [
-                'id' => $table->id,
-                'slug' => $table->slug,
-                'label' => $table->label,
-                'value' => [
-                    "textedit" => [
-                        "name" =>"textedit",
-                        "label" =>"texteditlabel",
-                        "type" =>"text",
-                        'data' => 'this is value text',
+        $table = Content::orderBy('id', 'asc')->latest()->first();
+        $request_data = [
+            'id' => $table->id,
+            'slug' => $table->slug,
+            'label' => $table->label,
+            'value' => [
+                'textedit' => [
+                    'name' =>'textedit',
+                    'label' =>'texteditlabel',
+                    'type' =>'text',
+                    'data' => 'this is value text',
+                ],
+                'imageedit'=>[
+                    'name'=>'imageedit',
+                    'label'=>'imageeditlabel',
+                    'type'=>'image',
+                    'data' => 'News baru (1).jpg',
+                ],
+                'urledit'=>[
+                    'name'=>'urledit',
+                    'label'=>'urleditlabel',
+                    'type'=>'url',
+                    'data'=>[
+                        'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
+                        'text' => '405 not permission',
                     ],
-                        "imageedit"=>[
-                        "name"=>"imageedit",
-                        "label"=>"imageeditlabel",
-                        "type"=>"image",
-                        'data' => 'News baru (1).jpg',
-                    ],
-                        "urledit"=>[
-                        "name"=>"urledit",
-                        "label"=>"urleditlabel",
-                        "type"=>"url",
-                        "data"=>[
-                            'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
-                            'text' => '405 not permission',
+                ],
+                'groupedit'=>[
+                    'name'=>'groupedit',
+                    'label'=>'groupeditlabel',
+                    'type'=>'group',
+                    'data'=>[
+                        'text'=>[
+                            'name'=>'text',
+                            'label'=>'text',
+                            'type'=>'text',
+                            'data'=>'this is value in group text',
                         ],
-                    ],
-                        "groupedit"=>[
-                        "name"=>"groupedit",
-                        "label"=>"groupeditlabel",
-                        "type"=>"group",
-                        "data"=>[
-                            'text'=>[
-                                'name'=>'text',
-                                'label'=>'text',
-                                'type'=>'text',
-                                'data'=>'this is value in group text',
+                        'url'=>[
+                            'name'=>'url',
+                            'label'=>'url',
+                            'type'=>'url',
+                            'data'=>[
+                                'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
+                                'text' => 'this is url in group url',
                             ],
-                            'url'=>[
-                                'name'=>'url',
-                                'label'=>'url',
-                                'type'=>'url',
-                                'data'=>[
-                                    'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
-                                    'text' => 'this is url in group url',
-                                ],
-                                "image"=>[
-                                    "name"=>"img",
-                                    "label"=>"img",
-                                    "type"=>"image",
-                                    "data"=>"News baru (1).jpg"
-                                ],
-                                ],
-                                ],],],];
-                    
-                        
-            $response = $this->withHeader('Authorization', "Bearer $token")->json("PUT", $this->getContentApiV1('/content/fill'), $request_data);
-            $response->assertSuccessful();
+                            'image'=>[
+                                'name'=>'img',
+                                'label'=>'img',
+                                'type'=>'image',
+                                'data'=>'News baru (1).jpg',
+                            ],
+                        ],
+                    ], ], ], ];
 
-            $table = Content::orderBy('id','asc')->latest()->first();
-            $table_data_value = json_decode($table->value, true);
-            foreach ($table_data_value as $key => $tab) {
-                if ($tab['type'] == 'group') {
-                    if ($request_data['value'][$key]['data']) {
-                        foreach ($request_data['value'][$key]['data'] as $key => $value) {
-                            if ($tab['data'][$value['name']]) {
-                                if ($value['type'] == 'url') {
-                                    $this->assertTrue($value['data']['url'] == $tab['data'][$value['name']]['data']['url']);
-                                    $this->assertTrue($value['data']['text'] == $tab['data'][$value['name']]['data']['text']);
-                                } elseif ($value['type'] == 'image') {
-                                    $this->assertTrue($value['data'] == $tab['data'][$value['name']]['data']);
-                                } else {
-                                    $this->assertTrue($value['data'] == $tab['data'][$value['name']]['data']);
-                                }
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('PUT', $this->getContentApiV1('/content/fill'), $request_data);
+        $response->assertSuccessful();
+
+        $table = Content::orderBy('id', 'asc')->latest()->first();
+        $table_data_value = json_decode($table->value, true);
+        foreach ($table_data_value as $key => $tab) {
+            if ($tab['type'] == 'group') {
+                if ($request_data['value'][$key]['data']) {
+                    foreach ($request_data['value'][$key]['data'] as $key => $value) {
+                        if ($tab['data'][$value['name']]) {
+                            if ($value['type'] == 'url') {
+                                $this->assertTrue($value['data']['url'] == $tab['data'][$value['name']]['data']['url']);
+                                $this->assertTrue($value['data']['text'] == $tab['data'][$value['name']]['data']['text']);
+                            } elseif ($value['type'] == 'image') {
+                                $this->assertTrue($value['data'] == $tab['data'][$value['name']]['data']);
+                            } else {
+                                $this->assertTrue($value['data'] == $tab['data'][$value['name']]['data']);
                             }
                         }
                     }
-                }else{
+                }
+            } else {
                 $request_data_array = $request_data['value'][$key];
                 if (isset($request_data_array['data']) && $request_data_array['type'] != 'group') {
                     if (isset($request_data_array['data']['url'])) {
@@ -326,24 +326,24 @@ class BadasoContentApiTest extends TestCase
                         $this->assertTrue($request_data_array['data'] == $tab['data']);
                     }
                 }
-                }
             }
+        }
     }
 
     public function test_fetch_multiple()
     {
-        $table = Content::orderBy('id','asc')->latest()->limit(2)->get();
+        $table = Content::orderBy('id', 'asc')->latest()->limit(2)->get();
         $slug = [];
         foreach ($table as $key => $value) {
             $slug[] = $value->slug;
         }
-        
-        $request_data = ['slug'=>join(",",$slug)];
-        $response = $this->json("GET", $this->getContentApiV1("/content/fetch-multiple"),$request_data);
+
+        $request_data = ['slug'=>join(',', $slug)];
+        $response = $this->json('GET', $this->getContentApiV1('/content/fetch-multiple'), $request_data);
         $response->assertSuccessful();
 
         $response = $response->json('data');
-        $table = Content::orderBy('id','asc')->latest()->limit(2)->get();
+        $table = Content::orderBy('id', 'asc')->latest()->limit(2)->get();
         foreach ($response as $index => $value) {
             $str_slug = $slug[$index];
             $table_data = $table->where('slug', $str_slug)->first();
@@ -377,10 +377,10 @@ class BadasoContentApiTest extends TestCase
                         } else {
                             if ($respon_data_array['data'] == $tab['data']) {
                                 $this->assertTrue($respon_data_array['data'] == $tab['data']);
-                            } 
+                            }
                         }
                     }
-                    }
+                }
             }
         }
     }
@@ -392,7 +392,7 @@ class BadasoContentApiTest extends TestCase
         $request_data = [
             'id' => $table->id,
         ];
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", $this->getContentApiV1('/content/delete'), $request_data);
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('DELETE', $this->getContentApiV1('/content/delete'), $request_data);
         $response->assertSuccessful();
         $table = Content::find($table->id);
         $this->assertTrue($table == null);
@@ -409,8 +409,8 @@ class BadasoContentApiTest extends TestCase
         $request_data = [
             'ids' => join(',', $ids),
         ];
-        
-        $response = $this->withHeader('Authorization', "Bearer $token")->json("DELETE", $this->getContentApiV1('/content/delete-multiple'), $request_data);
+
+        $response = $this->withHeader('Authorization', "Bearer $token")->json('DELETE', $this->getContentApiV1('/content/delete-multiple'), $request_data);
         $response->assertSuccessful();
         $table = Content::whereIn('id', $ids)->get();
         $table_count = $table->count();
