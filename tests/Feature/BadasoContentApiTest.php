@@ -343,7 +343,7 @@ class BadasoContentApiTest extends TestCase
         $response->assertSuccessful();
 
         $response = $response->json('data');
-        $table = Content::latest()->limit(2)->get();
+        $table = Content::orderBy('id','asc')->latest()->limit(2)->get();
         foreach ($response as $index => $value) {
             $str_slug = $slug[$index];
             $table_data = $table->where('slug', $str_slug)->first();
