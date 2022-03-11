@@ -332,7 +332,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_fetch_multiple()
     {
-        $table = Content::latest()->limit(2)->get();
+        $table = Content::orderBy('id','asc')->latest()->limit(2)->get();
         $slug = [];
         foreach ($table as $key => $value) {
             $slug[] = $value->slug;
