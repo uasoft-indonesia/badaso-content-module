@@ -153,7 +153,7 @@ class BadasoContentApiTest extends TestCase
     public function test_edit()
     {
         $token = CallHelperTest::login($this);
-        $table = Content::latest()->first();
+        $table = Content::latest()->orderBy('id', 'asc')->first();
         $request_data = [
             'id' => $table->id,
             'slug' => $table->slug,
