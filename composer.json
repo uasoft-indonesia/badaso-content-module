@@ -22,7 +22,6 @@
   },
   "type": "library",
   "require": {
-    "symfony/var-exporter": "^5.2.0"
   },
   "authors": [
     {
