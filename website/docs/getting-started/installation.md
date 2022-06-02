@@ -16,7 +16,7 @@ composer require badaso/content-module
 php artisan migrate
 php artisan badaso-content:setup
 composer dump-autoload
-php artisan db:seed --class=BadasoContentModuleSeeder
+php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder"
 ```
 
 3. Add the plugins to your `MIX_BADASO_MODULES` to `.env`. If you have another plugins installed, include them using delimiter comma (,).
