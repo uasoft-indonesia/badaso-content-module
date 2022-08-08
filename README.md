@@ -18,7 +18,7 @@ composer require badaso/content-module:^1.0
 ```
 MIX_DEFAULT_MENU=admin
 MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module
-MIX_BADASO_MODULES=content-module
+MIX_BADASO_PLUGINS=content-module
 ```
 3. Call command `php artisan migrate`
 4. Call command `php artisan badaso-content:setup` or `php artisan badaso-content:setup --force` if you want to overwrite the file 

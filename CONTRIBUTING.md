@@ -110,7 +110,7 @@ php artisan db:seed --class=BadasoContentModuleSeeder
 ```
 MIX_DEFAULT_MENU=admin
 MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module
-MIX_BADASO_MODULES=content-module
+MIX_BADASO_PLUGINS=content-module
 ```
 
 9. In menu item "Role Management" from badaso admin panel, add permission user to fill content
