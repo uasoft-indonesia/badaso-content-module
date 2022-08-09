@@ -230,7 +230,7 @@ export default {
             this.$vs.notify({
               title: this.$t("alert.danger"),
               text: error.message,
-              color: "danger",
+              color: "danger",    
             });
           });
       } else {
@@ -299,6 +299,10 @@ export default {
           url: "",
           text: ""
         };
+      }
+      
+      if (event === 'array') {
+        item.data = {};
       }
     },
     moveDown(index) {

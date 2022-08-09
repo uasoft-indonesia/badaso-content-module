@@ -39,6 +39,9 @@
           <template v-if="tr.type === 'group'">
             <badaso-content-read :items="tr.data"></badaso-content-read>
           </template>
+          <template v-if="tr.type === 'array'">
+            <badaso-content-read :items="tr.data"></badaso-content-read>
+          </template>
         </td>
       </tr>
     </tbody>

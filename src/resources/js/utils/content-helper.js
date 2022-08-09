@@ -1,6 +1,6 @@
 export default {
   isMultipleFields(field) {
-    return field.type === 'group';
+    return field.type === 'group' || field.type === 'array';
   },
   stringToJson(string) {
     return string.replace(/\s+/g, '').trim()
@@ -38,6 +38,10 @@ export default {
       {
         label: "Group",
         value: "group",
+      },
+      {
+        label: "Array",
+        value: "array",
       }
     ]
   },

@@ -147,10 +147,14 @@ export default {
   },
   methods: {
     isMultipleFields(item) {
-      item.type === 'group' ? true : false
+      item.type === 'group' || item.type === 'array' ? true : false
     },
     changeDataType(item, event) {
       if (item.type === 'group') {
+        item.data = {};
+      }
+      
+      if (item.type === 'array') {
         item.data = {};
       }
 

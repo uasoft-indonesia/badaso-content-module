@@ -101,6 +101,10 @@ export default {
             this.field.data = {};
           }
 
+          if (this.field.type === 'array') {
+            this.field.data = {};
+          }
+
           if (this.field.type === 'text' || this.field.type === 'image') {
             this.field.data = "";
           }
