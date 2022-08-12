@@ -51,10 +51,10 @@
               <vs-col :key="index" vs-lg="12" vs-xs="12" v-if="item.type === 'array'">
                 <h3 class="my-2">{{ item.label }}</h3>
                 <div>
-                  <badaso-content-fill-array :type="type" :items="item.data"></badaso-content-fill-array>
+                  <badaso-content-fill :type="type" :items="item.data"></badaso-content-fill>
                 </div>
                 {{  }}
-                <vs-button color="primary" type="relief" @click="addNewItem(item.data, item.data)"
+                <vs-button color="primary" type="relief" @click="addNewItem(item, item.data)"
                   :style="{'left' : 'none'}">
                   <vs-icon icon="add"></vs-icon>
                   {{ $t("content.fill.button.fill") }}
@@ -181,24 +181,7 @@ export default {
       }
     },
     addNewItem(parent, value) {
-      length = Object.values(value).length
-      for(let i=0; i < length; i++){
-        if (Object.values(value)[i].type === "url") {
-          Object.values(value)[i].data = {
-            url: "",
-            text: "",
-          };
-        }
-
-        if (Object.values(value)[i].type === "text") {
-          Object.values(value)[i].data = "";
-        }
-
-        if (Object.values(value)[i].type === "image") {
-          Object.values(value)[i].data = null;
-        } 
-      this.$set(parent, Object.keys(value), Object.values(value)[i]);
-      }
+      parent.push(parent.data)
       
     },
   },

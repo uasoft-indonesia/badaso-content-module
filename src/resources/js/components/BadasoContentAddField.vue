@@ -63,6 +63,9 @@ export default {
     },
     show: false
   }),
+  props: {
+    parent: "",
+  },
   computed: {
     getTypeContent: {
       get() {
@@ -94,7 +97,7 @@ export default {
   },
   methods: {
     addItem() {
-      if (this.show) {
+      if (this.show) { 
         this.$v.field.$touch();
         if (!this.$v.field.$invalid) {
           if (this.field.type === 'group') {
@@ -102,7 +105,7 @@ export default {
           }
 
           if (this.field.type === 'array') {
-            this.field.data = {};
+            this.field.data = [];
           }
 
           if (this.field.type === 'text' || this.field.type === 'image') {
@@ -115,10 +118,13 @@ export default {
               text: ""
             };
           }
-
           var key = this.field.name;
           var value = { ...this.field };
-          this.$emit('click', { [key]: value });
+          if(this.parent == 'array'){
+            this.$emit('click', { [key]: value }  );
+          }else{
+            this.$emit('click', { [key]: value });
+          }
           this.clearItem();
           this.$v.$reset();
           this.show = false

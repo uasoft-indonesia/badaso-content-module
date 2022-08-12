@@ -59,6 +59,7 @@
 
             <tbody>
               <template v-for="(item, key, index) in items">
+                {{items}}
                 <tr :key="items.name + '-' + key">
                   <td>
                     <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
@@ -302,7 +303,7 @@ export default {
       }
       
       if (event === 'array') {
-        item.data = {};
+        item.data = [];
       }
     },
     moveDown(index) {

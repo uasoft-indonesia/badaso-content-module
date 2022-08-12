@@ -3,68 +3,38 @@
     <table class="w-100">
       <tbody>
         <template v-for="(item, key, index) in items.data">
+          {{ items.data}}
           <tr :key="items.name + '-' + key">
             <td style="vertical-align: inherit;">
-              <vs-icon icon="chevron_right" :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}" @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
+              <vs-icon icon="chevron_right"
+                :class="{'expandable rotate': opened.includes(index), 'expandable': !opened.includes(index)}"
+                @click="toggle(index)" v-if="contentHelper.isMultipleFields(item)"></vs-icon>
             </td>
             <td>
-              <badaso-text
-                v-model="item.label"
-                size="12"
-                :label="$t('content.add.field.content.label.title')"
-                :placeholder="$t('content.add.field.content.label.placeholder')"
-              ></badaso-text>
+              <badaso-text v-model="item.label" size="12" :label="$t('content.add.field.content.label.title')"
+                :placeholder="$t('content.add.field.content.label.placeholder')"></badaso-text>
             </td>
             <td>
-              <badaso-text
-                v-model="item.name"
-                size="12"
-                :label="$t('content.add.field.content.name.title')"
-                :placeholder=" $t('content.add.field.content.name.placeholder')"
-                disabled
-              ></badaso-text>
+              <badaso-text v-model="item.name" size="12" :label="$t('content.add.field.content.name.title')"
+                :placeholder=" $t('content.add.field.content.name.placeholder')" disabled></badaso-text>
             </td>
             <td>
-              <badaso-select
-                v-model="item.type"
-                size="12"
-                :label="$t('content.add.field.content.type')"
-                :items="fieldList"
-                :value="field.type"
-                @input="changeDataType(item, $event)"
-              ></badaso-select>
+              <badaso-select v-model="item.type" size="12" :label="$t('content.add.field.content.type')"
+                :items="fieldList" :value="field.type" @input="changeDataType(item, $event)"></badaso-select>
             </td>
             <td style="vertical-align: inherit;">
-              <vs-button
-                color="primary"
-                type="relief"
-                @click="openCopyItemDialog(item)"
-              >
+              <vs-button color="primary" type="relief" @click="openCopyItemDialog(item)">
                 <vs-icon icon="content_copy"></vs-icon>
               </vs-button>
-              <vs-button
-                color="danger"
-                type="relief"
-                @click="dropItem(item, key)"
-              >
+              <vs-button color="danger" type="relief" @click="dropItem(item, key)">
                 <vs-icon icon="delete"></vs-icon>
               </vs-button>
-              <vs-button
-                color="warning"
-                type="relief"
-                @click="moveUp(index)"
-                v-if="Object.values(items.data).length > 1"
-                :disabled="index === 0"
-              >
+              <vs-button color="warning" type="relief" @click="moveUp(index)"
+                v-if="Object.values(items.data).length > 1" :disabled="index === 0">
                 <vs-icon icon="expand_less"></vs-icon>
               </vs-button>
-              <vs-button
-                color="warning"
-                type="relief"
-                @click="moveDown(index)"
-                v-if="Object.values(items.data).length > 1"
-                :disabled="index === Object.values(items.data).length - 1"
-              >
+              <vs-button color="warning" type="relief" @click="moveDown(index)"
+                v-if="Object.values(items.data).length > 1" :disabled="index === Object.values(items.data).length - 1">
                 <vs-icon icon="expand_more"></vs-icon>
               </vs-button>
             </td>
@@ -76,22 +46,14 @@
           </tr>
         </template>
       </tbody>
-      <badaso-content-add-field v-model="invalid" @click="addItem($event, items)"></badaso-content-add-field>
+      <badaso-content-add-field v-model="invalid" :parent="items.type" @click="addItem($event, items)">
+      </badaso-content-add-field>
     </table>
-    <vs-prompt
-      color="primary"
-      @cancel="copyItemName = ''"
-      @accept="copyItem"
-      @close="willCopyItem = {}; copyItemName = ''"
-      :is-valid="validName"
-      :active.sync="copyItemDialog">
+    <vs-prompt color="primary" @cancel="copyItemName = ''" @accept="copyItem"
+      @close="willCopyItem = {}; copyItemName = ''" :is-valid="validName" :active.sync="copyItemDialog">
       <div class="con-exemple-prompt">
-        <badaso-text
-          v-model="copyItemName"
-          size="12"
-          :label="$t('content.add.field.content.name.title')"
-          :placeholder=" $t('content.add.field.content.name.placeholder')"
-        ></badaso-text>
+        <badaso-text v-model="copyItemName" size="12" :label="$t('content.add.field.content.name.title')"
+          :placeholder=" $t('content.add.field.content.name.placeholder')"></badaso-text>
       </div>
     </vs-prompt>
   </div>
@@ -113,7 +75,8 @@ export default {
     copyItemDialog: false,
     copyItemName: "",
     invalid: false,
-    contentHelper
+    contentHelper,
+    currentType: ""
   }),
   props: {
     items: {
@@ -149,13 +112,15 @@ export default {
     isMultipleFields(item) {
       item.type === 'group' || item.type === 'array' ? true : false
     },
+
     changeDataType(item, event) {
+      
       if (item.type === 'group') {
         item.data = {};
       }
       
       if (item.type === 'array') {
-        item.data = {};
+        item.data = [];
       }
 
       if (item.type === 'text' || item.type === 'image') {
@@ -170,7 +135,11 @@ export default {
       }
     },
     addItem(event, items) {
-      this.$set(items.data, Object.keys(event), Object.values(event)[0])
+      if (items.type == 'array'){
+        items.data.push(event)
+      }else{
+        this.$set(items.data, Object.keys(event), Object.values(event)[0])
+      }
     },
     toggle(index) {
       if (this.opened.includes(index)) {

@@ -1,7 +1,6 @@
 import BadasoContent from "./BadasoContent";
 import BadasoContentAddField from "./BadasoContentAddField";
 import BadasoContentFill from "./BadasoContentFill";
-import BadasoContentFillArray from "./BadasoContentFillArray";
 import BadasoContentRead from "./BadasoContentRead";
 
 
@@ -10,5 +9,4 @@ export default  {
   BadasoContentAddField,
   BadasoContentFill,
   BadasoContentRead,
-  BadasoContentFillArray,
 };
