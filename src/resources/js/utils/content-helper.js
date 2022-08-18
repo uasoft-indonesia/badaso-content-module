@@ -1,52 +1,56 @@
 export default {
   isMultipleFields(field) {
-    return field.type === 'group';
+    return field.type === "group" || field.type === "array";
   },
   stringToJson(string) {
-    return string.replace(/\s+/g, '').trim()
+    return string.replace(/\s+/g, "").trim();
   },
   getTypeContent() {
     return [
       {
         label: "Text",
-        value: "text"
+        value: "text",
       },
       {
         label: "Image",
-        value: "image"
+        value: "image",
       },
       {
         label: "URL",
-        value: "url"
+        value: "url",
       },
-    ]
+    ];
   },
   getAllTypeContent() {
     return [
       {
         label: "Text",
-        value: "text"
+        value: "text",
       },
       {
         label: "Image",
-        value: "image"
+        value: "image",
       },
       {
         label: "URL",
-        value: "url"
+        value: "url",
       },
       {
         label: "Group",
         value: "group",
-      }
-    ]
+      },
+      {
+        label: "Array",
+        value: "array",
+      },
+    ];
   },
   getRandomColor() {
-    var letters = 'BCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * letters.length)];
+    var letters = "BCDEF".split("");
+    var color = "#";
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * letters.length)];
     }
     return color;
-  }
-}
+  },
+};
