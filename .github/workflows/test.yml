@@ -150,6 +150,5 @@ jobs:
           
       # Pgsql | Badaso Content Module test
       - name: Pgsql | Badaso Content Module test
-        run: cd laravel && 
-        sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env &&
+        run: cd laravel &&
         php artisan test
