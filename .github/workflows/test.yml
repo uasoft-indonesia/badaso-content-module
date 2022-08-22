@@ -80,12 +80,8 @@ jobs:
           cd laravel &&
           composer require badaso/core:^2.0 &&
           composer require badaso/content-module:dev-${GITHUB_HEAD_REF} &&
-<<<<<<< HEAD
           composer update --no-interaction &&
-=======
-          composer update --no-interaction
->>>>>>> b730eb75a1a1fcb42d11052942a9dd40f0b2772c
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env
 
       # Mysql | Laravel setup
       - name: Mysql | Laravel setup
