@@ -80,8 +80,7 @@ jobs:
           cd laravel &&
           composer require badaso/core:^2.0 &&
           composer require badaso/content-module:dev-${GITHUB_HEAD_REF} &&
-          composer update --no-interaction &&
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env
+          composer update --no-interaction
 
       # Mysql | Laravel setup
       - name: Mysql | Laravel setup
@@ -94,8 +93,9 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' &&
           echo -e "\nMIX_BADASO_PLUGINS=content-module" >> .env 
-  
+
       # Mysql | Badaso Content Module test
       - name: Mysql | Badaso Content Module test
         run: cd laravel && php artisan test
@@ -121,9 +121,7 @@ jobs:
 
       # Sqlite | Badaso Content Module test
       - name: Sqlite | Badaso Content Module test
-        run: cd laravel && 
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env &&
-          php artisan test 
+        run: cd laravel && php artisan test
 
       # Pgsql | Laravel configuration
       - name: Pgsql | Laravel file configuration
@@ -133,8 +131,7 @@ jobs:
           sed -i 's/DB_PASSWORD=/DB_PASSWORD=postgres/g' .env  &&
           sed -i 's/DB_HOST=127.0.0.1/DB_HOST=localhost/g' .env &&
           sed -i 's/DB_USERNAME=root/DB_USERNAME=postgres/g' .env &&
-          sed -i 's/DB_PORT=3306/DB_PORT=5432/g' .env &&
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env 
+          sed -i 's/DB_PORT=3306/DB_PORT=5432/g' .env
 
       # Pgsql | Laravel setup
       - name: Pgsql | Laravel setup
@@ -145,8 +142,7 @@ jobs:
           php artisan db:wipe &&
           php artisan migrate &&
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
-          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder"  &&
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env 
+          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
           
       # Pgsql | Badaso Content Module test
       - name: Pgsql | Badaso Content Module test
