@@ -150,5 +150,4 @@ jobs:
           
       # Pgsql | Badaso Content Module test
       - name: Pgsql | Badaso Content Module test
-        run: cd laravel &&
-        php artisan test
+        run: cd laravel && php artisan test
