@@ -93,7 +93,7 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env &&
           echo -e "\nMIX_BADASO_PLUGINS=content-module" >> .env 
 
       # Mysql | Badaso Content Module test
