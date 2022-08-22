@@ -78,7 +78,7 @@ import { required, alphaNum, helpers } from "vuelidate/lib/validators";
 
 import contentHelper from "../utils/content-helper";
 
-const nonNumericOnFirstChar = value => helpers.regex(value, /^(?![0-9_])\w+$/);
+const nonNumericOnFirstChar = (value) => helpers.regex(value, /^(?![0-9_])\w+$/);
 
 export default {
   name: "BadasoContentAddField",
