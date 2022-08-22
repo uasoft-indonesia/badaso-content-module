@@ -48,7 +48,7 @@
               </vs-col>
 
               <!-- ARRAY TYPE -->
-              <vs-col :key="index" vs-lg="12" vs-xs="12" v-if="item.type === 'array'">
+              <vs-col :key="index" vs-lg="12" vs-xs="12" v-if="item.type === 'array'" style="margin-bottom: 20px;">
                 <h3 class="my-2">{{ item.label }}</h3>
                 <div>
                   <badaso-content-fill :items="item"></badaso-content-fill>

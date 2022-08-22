@@ -247,6 +247,7 @@ export default {
       }
       [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]];
 
+      console.log(tempObject)
       tempObject = this.convertArrayToObject(temp, "name");
       this.items.data = tempObject;
     },
@@ -266,6 +267,7 @@ export default {
     convertArrayToObject(array, key) {
       const initialValue = {};
       return array.reduce((obj, item) => {
+        console.log(obj, item)
         return {
           ...obj,
           [item[key]]: item,

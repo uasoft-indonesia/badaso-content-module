@@ -28,10 +28,41 @@
             </vs-col>
           </vs-col>
         </vs-td>
-        <vs-td style="padding: 0 0 0 15px;">
+        <vs-td style="padding: 0 0 0 5px;">
+           <vs-button
+                color="primary"
+                type="relief"
+                @click="openCopyItemDialog(items.data)"
+              >
+                <vs-icon icon="content_copy"></vs-icon>
+              </vs-button>
+        </vs-td>
+        <vs-td style="padding: 0 0 0 5px;">
           <vs-button  color="danger" type="relief" @click="dropItem(index)">
             <vs-icon icon="delete"></vs-icon>
           </vs-button>
+        </vs-td>
+        <vs-td style="padding: 0 0 0 5px;">
+          <vs-button
+                color="warning"
+                type="relief"
+                @click="moveUp(index)"
+                v-if="items.data.length > 1"
+                :disabled="index === 0"
+              >
+                <vs-icon icon="expand_less"></vs-icon>
+              </vs-button>
+        </vs-td>
+        <vs-td style="padding: 0 0 0 5px;">
+            <vs-button
+                color="warning"
+                type="relief"
+                @click="moveDown(index)"
+                v-if="items.data.length > 1"
+                :disabled="index === Object.values(items.data).length - 1"
+              >
+                <vs-icon icon="expand_more"></vs-icon>
+            </vs-button>
         </vs-td>
         <hr>
       </vs-col>
@@ -76,7 +107,6 @@ export default {
   },
   methods: {
     dropItem(index) {
-      console.log(index, this.items)
       this.$vs.dialog({
         type: "confirm",
         color: "danger",
@@ -87,6 +117,41 @@ export default {
         cancelText: this.$t("action.delete.cancel"),
         cancel: () => { },
       });
+    },
+    openCopyItemDialog(item) {
+      let data = JSON.parse(JSON.stringify(item[0]))
+      item.splice(item.length + 1, 0, data);
+    },
+    moveDown(index) {
+      const temp = [];
+      for (const item in this.items.data) {
+        if (Object.hasOwnProperty.call(this.items.data, item)) {
+          temp.push(this.items.data[item]);
+        }
+      }
+      [temp[index], temp[index + 1]] = [temp[index + 1], temp[index]];
+
+      this.items.data = temp;
+    },
+    moveUp(index) {
+      const temp = [];
+      for (const item in this.items.data) {
+        if (Object.hasOwnProperty.call(this.items.data, item)) {
+          temp.push(this.items.data[item]);
+        }
+      }
+      [temp[index], temp[index - 1]] = [temp[index - 1], temp[index]];
+
+      this.items.data = temp;
+    },
+    convertArrayToObject(array, key) {
+      const initialValue = {};
+      return array.reduce((obj, item) => {
+        return {
+          ...obj,
+          [item[key]]: item,
+        };
+      }, initialValue);
     },
   }
 };
