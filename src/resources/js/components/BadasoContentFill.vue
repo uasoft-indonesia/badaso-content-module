@@ -32,7 +32,7 @@
            <vs-button
                 color="primary"
                 type="relief"
-                @click="openCopyItemDialog(items.data)"
+                @click="openCopyItemDialog(items.data, index)"
               >
                 <vs-icon icon="content_copy"></vs-icon>
               </vs-button>
@@ -118,8 +118,8 @@ export default {
         cancel: () => { },
       });
     },
-    openCopyItemDialog(item) {
-      let data = JSON.parse(JSON.stringify(item[0]))
+    openCopyItemDialog(item, index) {
+      let data = JSON.parse(JSON.stringify(item[index]))
       item.splice(item.length + 1, 0, data);
     },
     moveDown(index) {
