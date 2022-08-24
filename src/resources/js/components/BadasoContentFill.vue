@@ -86,9 +86,17 @@
           <h3 class="my-2">{{ groupItem.label }}</h3>
           <badaso-content-fill :items="groupItem.data"></badaso-content-fill>
         </vs-col>
-        <vs-col :key="index" vs-lg="12" vs-xs="12" v-if="groupItem.type === 'array'">
-          <h3 class="my-2">{{ groupItem.data }}</h3>
-          <badaso-content-fill :items="groupItem.data"></badaso-content-fill>
+        <!-- ARRAY TYPE -->
+        <vs-col :key="index" vs-lg="12" vs-xs="12" v-if="groupItem.type === 'array'" style="margin-bottom: 20px;">
+          <h3 class="my-2">{{ groupItem.label }}</h3>
+          <div>
+            <badaso-content-fill :items="groupItem"></badaso-content-fill>
+          </div>
+            <vs-button color="primary" type="relief" @click="addNewItem(groupItem.data, groupItem.data)"
+              :style="{'left' : 'none'}">
+              <vs-icon icon="add"></vs-icon>
+              {{ $t("content.fill.button.fill") }}
+            </vs-button>
         </vs-col>
       </vs-col>
     </template>
@@ -106,6 +114,19 @@ export default {
     },
   },
   methods: {
+    addNewItem(parent, value) {
+        let data = JSON.parse(JSON.stringify(value[0]))
+        for(let item in data){
+          if(data[item].type == 'url' || data[item].type == 'group'){
+              for(let key in data[item].data){
+                data[item].data[key] = ''
+              }
+          }else{
+            data[item].data = ''
+          }
+        }
+      parent.splice(parent.length + 1, 0, data);
+    },
     dropItem(index) {
       this.$vs.dialog({
         type: "confirm",
