@@ -180,7 +180,7 @@ export default {
     addNewItem(parent, value) {
         let data = JSON.parse(JSON.stringify(value[0]))
         for(let item in data){
-          if(item == 'url' || item == 'group'){
+          if(data[item].type == 'url' || data[item].type == 'group'){
               for(let key in data[item].data){
                 data[item].data[key] = ''
               }
@@ -188,7 +188,6 @@ export default {
             data[item].data = ''
           }
         }
-        console.log(data)
       parent.splice(parent.length + 1, 0, data);
     },
   },

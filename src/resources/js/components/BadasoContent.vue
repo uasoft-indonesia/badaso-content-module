@@ -213,16 +213,34 @@ export default {
       }
     },
     dropItem(items, key) {
-      this.$vs.dialog({
-        type: "confirm",
-        color: "danger",
-        title: this.$t("action.delete.title"),
-        text: this.$t("action.delete.text"),
-        accept: () => this.$delete(this.items.data, key),
-        acceptText: this.$t("action.delete.accept"),
-        cancelText: this.$t("action.delete.cancel"),
-        cancel: () => {},
-      });
+      
+      if(this.items.type == 'array'){
+        this.$vs.dialog({
+          type: "confirm",
+          color: "danger",
+          title: this.$t("action.delete.title"),
+          text: this.$t("action.delete.text"),
+          accept: () => {
+            for(let keys in this.items.data){
+              this.$delete(this.items.data[keys], key)
+            }
+          },
+          acceptText: this.$t("action.delete.accept"),
+          cancelText: this.$t("action.delete.cancel"),
+          cancel: () => {},
+        });
+      }else{
+        this.$vs.dialog({
+          type: "confirm",
+          color: "danger",
+          title: this.$t("action.delete.title"),
+          text: this.$t("action.delete.text"),
+          accept: () => this.$delete(this.items.data, key),
+          acceptText: this.$t("action.delete.accept"),
+          cancelText: this.$t("action.delete.cancel"),
+          cancel: () => {},
+        });
+      }
     },
     copyItem() {
       let item = _.cloneDeep({
