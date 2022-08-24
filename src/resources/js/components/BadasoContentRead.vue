@@ -10,11 +10,9 @@
     </thead>
 
     <tbody>
-      <tr :key="indextr" v-for="(tr, indextr) in items.type == 'array' 
-      ? items
-      : items">
       <template v-if="items.type === 'array'">
-     <div v-for="(item, index) in items.data[indextr]">
+        <tr :key="indextr" v-for="(tr, indextr) in items.data">
+        <template v-for="(item, index) in tr">
         <td>{{ item.label }}</td>
         <td>
           <template v-if="item.type === 'text'">
@@ -44,12 +42,15 @@
             <badaso-content-read :items="item.data"></badaso-content-read>
           </template>
           <template v-if="item.type === 'array'">
+                {{item.data}}
             <badaso-content-read :items="item.data"></badaso-content-read>
           </template>
         </td>
-      </div> 
+        </template>
+      </tr>
       </template>
       <template v-else>
+      <tr :key="indextr" v-for="(tr, indextr) in items">
         <td>{{ tr.label }}</td>
         <td>
           <template v-if="tr.type === 'text'">
@@ -79,11 +80,11 @@
             <badaso-content-read :items="tr.data"></badaso-content-read>
           </template>
           <template v-if="tr.type === 'array'">
-            <badaso-content-read :items="tr.data"></badaso-content-read>
+            <badaso-content-read :items="tr"></badaso-content-read>
           </template>
         </td>
-        </template>
       </tr>
+      </template>
     </tbody>
   </table>
 </template>
