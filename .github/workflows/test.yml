@@ -93,8 +93,8 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
-          sed -i 's/JWT_SECRET=/JWT_SECRET=hAujmc2A1vCBsoyEg7nd6obcrs4UCt4z1MzEOwZIJn9D0iBtVxVdWZV3tV0KxzFF/g' .env &&
-          echo -e "\nMIX_BADASO_PLUGINS=content-module" >> .env 
+          key=$(eval "php artisan jwt:secret -s") &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET="'${key}'"/g' .env
 
       # Mysql | Badaso Content Module test
       - name: Mysql | Badaso Content Module test
@@ -106,6 +106,8 @@ jobs:
           touch database/database.sqlite &&
           sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env &&
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=database\/database.sqlite/g' .env
+          key=$(eval "php artisan jwt:secret -s") &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET="'${key}'"/g' .env
           
 
       # Sqlite | Laravel setup
@@ -132,6 +134,8 @@ jobs:
           sed -i 's/DB_HOST=127.0.0.1/DB_HOST=localhost/g' .env &&
           sed -i 's/DB_USERNAME=root/DB_USERNAME=postgres/g' .env &&
           sed -i 's/DB_PORT=3306/DB_PORT=5432/g' .env
+          key=$(eval "php artisan jwt:secret -s") &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET="'${key}'"/g' .env
 
       # Pgsql | Laravel setup
       - name: Pgsql | Laravel setup
