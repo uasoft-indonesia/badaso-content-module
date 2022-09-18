@@ -93,7 +93,9 @@ jobs:
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
           php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" &&
           sed -i 's/MIX_BADASO_MENU=${MIX_DEFAULT_MENU}/MIX_BADASO_MENU=${MIX_DEFAULT_MENU},content-module/g' .env &&
-          echo -e "\nMIX_BADASO_PLUGINS=content-module" >> .env 
+          sed -i 's/MIX_BADASO_PLUGINS=/MIX_BADASO_PLUGINS=content-module/g' .env &&
+          key=$(eval "php artisan jwt:secret -s") &&
+          sed -i 's/JWT_SECRET=/JWT_SECRET="'${key}'"/g' .env
 
       # Mysql | Badaso Content Module test
       - name: Mysql | Badaso Content Module test
@@ -105,7 +107,6 @@ jobs:
           touch database/database.sqlite &&
           sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env &&
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=database\/database.sqlite/g' .env
-          
 
       # Sqlite | Laravel setup
       - name: Sqlite | Laravel setup

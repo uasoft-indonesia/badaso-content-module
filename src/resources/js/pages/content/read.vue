@@ -8,23 +8,11 @@
             <h3>{{ $t("content.read.title") }}</h3>
           </div>
           <vs-row>
-            <badaso-text
-              v-model="content.label"
-              size="6"
-              :label="$t('content.read.field.label.title')"
-              :placeholder="$t('content.read.field.label.placeholder')"
-              :alert="errors.label"
-              readonly
-            ></badaso-text>
+            <badaso-text v-model="content.label" size="6" :label="$t('content.read.field.label.title')"
+              :placeholder="$t('content.read.field.label.placeholder')" :alert="errors.label" readonly></badaso-text>
 
-            <badaso-text
-              v-model="content.slug"
-              size="6"
-              :label="$t('content.read.field.slug.title')"
-              :placeholder="$t('content.read.field.slug.placeholder')"
-              :alert="errors.slug"
-              readonly
-            ></badaso-text>
+            <badaso-text v-model="content.slug" size="6" :label="$t('content.read.field.slug.title')"
+              :placeholder="$t('content.read.field.slug.placeholder')" :alert="errors.slug" readonly></badaso-text>
 
             <table class="badaso-table">
               <thead>
@@ -47,12 +35,7 @@
                       <p v-else class="is-italic is-gray mb-0">Empty</p>
                     </template>
                     <template v-if="tr.type === 'image'">
-                      <img
-                        v-if="tr.data"
-                        :src="tr.data"
-                        :alt="tr.data"
-                        class="image-container"
-                      />
+                      <img v-if="tr.data" :src="tr.data" :alt="tr.data" class="image-container" />
                       <p v-else class="is-italic is-gray mb-0">Empty</p>
                     </template>
                     <template v-if="tr.type === 'url'">
@@ -65,6 +48,11 @@
                     </template>
                     <template v-if="tr.type === 'group'">
                       <badaso-content-read :items="tr.data"></badaso-content-read>
+                    </template>
+                    <template v-if="tr.type === 'array'">
+                      <template v-for="(tr, index) in tr.data">
+                        <badaso-content-read :items="tr"></badaso-content-read>
+                      </template>
                     </template>
                   </td>
                 </tr>

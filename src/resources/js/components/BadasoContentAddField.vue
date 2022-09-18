@@ -6,7 +6,13 @@
         :placeholder="$t('content.fill.field.addField.label.placeholder')"
         v-model="field.label"
         size="12"
-        :alert="$v.field.label.$error ? $t('vuelidate.required', [ $t('content.fill.field.addField.label.title')]) : ''"
+        :alert="
+          $v.field.label.$error
+            ? $t('vuelidate.required', [
+                $t('content.fill.field.addField.label.title'),
+              ])
+            : ''
+        "
       ></badaso-text>
     </td>
     <td v-show="show">
@@ -14,11 +20,25 @@
         :placeholder="$t('content.fill.field.addField.name.placeholder')"
         v-model="field.name"
         size="12"
-        :alert="$v.field.type.$error ? [
-          $v.field.name.required ? '' : $t('vuelidate.required', [ $t('content.fill.field.addField.name.title')]),
-          $v.field.name.alphaNum ? '' : $t('vuelidate.alphaNum', [ $t('content.fill.field.addField.name.title')]),
-          $v.field.name.nonNumericOnFirstChar ? '' : $t('vuelidate.nonNumericOnFirstChar'),
-        ] : ''"
+        :alert="
+          $v.field.type.$error
+            ? [
+                $v.field.name.required
+                  ? ''
+                  : $t('vuelidate.required', [
+                      $t('content.fill.field.addField.name.title'),
+                    ]),
+                $v.field.name.alphaNum
+                  ? ''
+                  : $t('vuelidate.alphaNum', [
+                      $t('content.fill.field.addField.name.title'),
+                    ]),
+                $v.field.name.nonNumericOnFirstChar
+                  ? ''
+                  : $t('vuelidate.nonNumericOnFirstChar'),
+              ]
+            : ''
+        "
       ></badaso-text>
     </td>
     <td v-show="show">
@@ -28,18 +48,26 @@
         v-model="field.type"
         size="12"
         :items="getTypeContent"
-        :alert="$v.field.type.$error ? $t('vuelidate.required', [$t('content.fill.field.addField.type.title')]): ''"
+        :alert="
+          $v.field.type.$error
+            ? $t('vuelidate.required', [
+                $t('content.fill.field.addField.type.title'),
+              ])
+            : ''
+        "
       ></badaso-select>
     </td>
-    <td style="text-align: center;" :colspan="show ? 1 : 5">
+    <td style="text-align: center" :colspan="show ? 1 : 5">
       <vs-button
         color="primary"
         type="relief"
         @click="addItem()"
-        :style="{'float': show ? 'left' : 'none'}"
+        :style="{ float: show ? 'left' : 'none' }"
       >
         <vs-icon icon="add"></vs-icon>
-        {{ show ? $t("content.fill.button.save") : $t("content.fill.button.fill") }}
+        {{
+          show ? $t("content.fill.button.save") : $t("content.fill.button.fill")
+        }}
       </vs-button>
     </td>
   </tfoot>
@@ -48,12 +76,12 @@
 <script>
 import { required, alphaNum, helpers } from "vuelidate/lib/validators";
 
-import contentHelper from '../utils/content-helper'
+import contentHelper from "../utils/content-helper";
 
-const nonNumericOnFirstChar = (value) => helpers.regex(value, /^(?![0-9_])\w+$/)
+const nonNumericOnFirstChar = (value) => helpers.regex(value, /^(?![0-9_])\w+$/);
 
 export default {
-  name : "BadasoContentAddField",
+  name: "BadasoContentAddField",
   data: () => ({
     field: {
       name: "",
@@ -61,7 +89,7 @@ export default {
       type: "",
       data: "",
     },
-    show: false
+    show: false,
   }),
   computed: {
     getTypeContent: {
@@ -82,45 +110,49 @@ export default {
         name: {
           required,
           alphaNum,
-          nonNumericOnFirstChar: nonNumericOnFirstChar(this.field.name)
+          nonNumericOnFirstChar: nonNumericOnFirstChar(this.field.name),
         },
       },
-    }
+    };
   },
   watch: {
     show(val) {
-      this.$emit('input', val)
-    }
+      this.$emit("input", val);
+    },
   },
   methods: {
     addItem() {
       if (this.show) {
         this.$v.field.$touch();
         if (!this.$v.field.$invalid) {
-          if (this.field.type === 'group') {
+          if (this.field.type === "group") {
             this.field.data = {};
           }
 
-          if (this.field.type === 'text' || this.field.type === 'image') {
+          if (this.field.type === "array") {
+            this.field.data =[{}];
+          }
+
+          if (this.field.type === "text" || this.field.type === "image") {
             this.field.data = "";
           }
 
-          if (this.field.type === 'url') {
+          if (this.field.type === "url") {
             this.field.data = {
               url: "",
-              text: ""
+              text: "",
             };
           }
 
           var key = this.field.name;
           var value = { ...this.field };
-          this.$emit('click', { [key]: value });
+          this.$emit("click", { [key]: value });
           this.clearItem();
           this.$v.$reset();
-          this.show = false
+          this.show = false;
         }
       } else {
-        this.show = true
+        this.show = true;
       }
     },
     clearItem() {
