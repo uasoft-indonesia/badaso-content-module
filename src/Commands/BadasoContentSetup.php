@@ -58,7 +58,11 @@ class BadasoContentSetup extends Command
             '--force' => $this->force,
         ]);
 
-        $this->call('l5-swagger:generate');
+        try {
+            $this->call('l5-swagger:generate');
+        } catch (\Exception $e) {
+            //throw $th;
+        }
     }
 
     private function hiddenTableHandle()
@@ -71,7 +75,7 @@ class BadasoContentSetup extends Command
             $content_config = VarExporter::export($hidden_table);
             $content_config = <<<PHP
             <?php
-            
+
             return {$content_config} ;
             PHP;
 
