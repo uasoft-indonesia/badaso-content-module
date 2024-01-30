@@ -35,8 +35,8 @@ class ContentController extends Controller
             $content = Content::where('id', $request->id)->first();
 
             $data = [
-                'id'    => $content->id,
-                'slug'  => $content->slug,
+                'id' => $content->id,
+                'slug' => $content->slug,
                 'label' => $content->label,
                 'value' => json_decode($content->value),
             ];
@@ -92,7 +92,7 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'slug'  => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug' => 'required|string|unique:Uasoft\Badaso\Module\Content\Models\Content',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -119,8 +119,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
-                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'id' => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content',
+                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
@@ -147,8 +147,8 @@ class ContentController extends Controller
 
         try {
             $request->validate([
-                'id'    => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content,id',
-                'slug'  => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content,slug',
+                'id' => 'required|exists:Uasoft\Badaso\Module\Content\Models\Content,id',
+                'slug' => 'required|string|exists:Uasoft\Badaso\Module\Content\Models\Content,slug',
                 'label' => 'required|string',
                 'value' => 'required',
             ]);
