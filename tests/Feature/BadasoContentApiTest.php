@@ -25,7 +25,7 @@ class BadasoContentApiTest extends TestCase
             $slug = 'This is Slug'."$i";
             $label = 'This is label'."$i";
             $request_data = [
-                'slug' =>  $slug,
+                'slug' => $slug,
                 'label' => $label,
                 'value' => '{
                 "text":{
@@ -203,7 +203,7 @@ class BadasoContentApiTest extends TestCase
     public function test_fetch()
     {
         $request_data = Content::latest()->first();
-        $request_data = ['slug'=>$request_data->slug];
+        $request_data = ['slug' => $request_data->slug];
         $response = $this->json('GET', $this->getContentApiV1('/content/fetch'), $request_data);
         $response->assertSuccessful();
 
@@ -380,199 +380,199 @@ class BadasoContentApiTest extends TestCase
             'label' => $table->label,
             'value' => [
                 'textedit' => [
-                    'name' =>'textedit',
-                    'label' =>'texteditlabel',
-                    'type' =>'text',
+                    'name' => 'textedit',
+                    'label' => 'texteditlabel',
+                    'type' => 'text',
                     'data' => 'this is value text',
                 ],
-                'imageedit'=>[
-                    'name'=>'imageedit',
-                    'label'=>'imageeditlabel',
-                    'type'=>'image',
+                'imageedit' => [
+                    'name' => 'imageedit',
+                    'label' => 'imageeditlabel',
+                    'type' => 'image',
                     'data' => 'News baru (1).jpg',
                 ],
-                'urledit'=>[
-                    'name'=>'urledit',
-                    'label'=>'urleditlabel',
-                    'type'=>'url',
-                    'data'=>[
+                'urledit' => [
+                    'name' => 'urledit',
+                    'label' => 'urleditlabel',
+                    'type' => 'url',
+                    'data' => [
                         'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
                         'text' => '405 not permission',
                     ],
                 ],
-                'groupedit'=>[
-                    'name'=>'groupedit',
-                    'label'=>'groupeditlabel',
-                    'type'=>'group',
-                    'data'=>[
-                        'text'=>[
-                            'name'=>'text',
-                            'label'=>'text',
-                            'type'=>'text',
-                            'data'=>'this is value in group text',
+                'groupedit' => [
+                    'name' => 'groupedit',
+                    'label' => 'groupeditlabel',
+                    'type' => 'group',
+                    'data' => [
+                        'text' => [
+                            'name' => 'text',
+                            'label' => 'text',
+                            'type' => 'text',
+                            'data' => 'this is value in group text',
                         ],
-                        'url'=>[
-                            'name'=>'url',
-                            'label'=>'url',
-                            'type'=>'url',
-                            'data'=>[
+                        'url' => [
+                            'name' => 'url',
+                            'label' => 'url',
+                            'type' => 'url',
+                            'data' => [
                                 'url' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405',
                                 'text' => 'this is url in group url',
                             ],
-                            'image'=>[
-                                'name'=>'img',
-                                'label'=>'img',
-                                'type'=>'image',
-                                'data'=>'News baru (1).jpg',
+                            'image' => [
+                                'name' => 'img',
+                                'label' => 'img',
+                                'type' => 'image',
+                                'data' => 'News baru (1).jpg',
                             ],
                         ],
                     ],
                 ],
-                'arrayedit'=>[
-                    'name'=> 'arrayedit',
-                    'label'=> 'arrayedit',
-                    'type'=>'array',
-                    'data'=>[
+                'arrayedit' => [
+                    'name' => 'arrayedit',
+                    'label' => 'arrayedit',
+                    'type' => 'array',
+                    'data' => [
                         [
-                            'text'=>[
-                                'name'=>'text',
-                                'label'=>'text',
-                                'type'=>'text',
-                                'data'=>'data array text',
+                            'text' => [
+                                'name' => 'text',
+                                'label' => 'text',
+                                'type' => 'text',
+                                'data' => 'data array text',
                             ],
-                            'url'=>[
-                                'name'=>'url',
-                                'label'=>'url',
-                                'type'=>'url',
-                                'data'=>[
-                                    'url'=> 'url array data',
-                                    'text'=> 'data array text',
+                            'url' => [
+                                'name' => 'url',
+                                'label' => 'url',
+                                'type' => 'url',
+                                'data' => [
+                                    'url' => 'url array data',
+                                    'text' => 'data array text',
                                 ],
-                            ], 'img'=>[
-                                'name'=>'img',
-                                'label'=>'img',
-                                'type'=>'image',
-                                'data'=> 'data array image',
-                            ], 'grup'=>[
-                                'name'=>'this is group',
-                                'label'=>'this is group',
-                                'type'=>'group',
-                                'data'=>[
-                                    'text'=>[
-                                        'name'=>'text',
-                                        'label'=>'text',
-                                        'type'=>'text',
-                                        'data'=> 'data group array text',
+                            ], 'img' => [
+                                'name' => 'img',
+                                'label' => 'img',
+                                'type' => 'image',
+                                'data' => 'data array image',
+                            ], 'grup' => [
+                                'name' => 'this is group',
+                                'label' => 'this is group',
+                                'type' => 'group',
+                                'data' => [
+                                    'text' => [
+                                        'name' => 'text',
+                                        'label' => 'text',
+                                        'type' => 'text',
+                                        'data' => 'data group array text',
                                     ],
-                                    'url'=>[
-                                        'name'=>'url',
-                                        'label'=>'url',
-                                        'type'=>'url',
-                                        'data'=>[
-                                            'url'=> 'data group url array',
-                                            'text'=> 'data group url array text',
+                                    'url' => [
+                                        'name' => 'url',
+                                        'label' => 'url',
+                                        'type' => 'url',
+                                        'data' => [
+                                            'url' => 'data group url array',
+                                            'text' => 'data group url array text',
                                         ],
-                                    ], 'img'=>[
-                                        'name'=>'img',
-                                        'label'=>'img',
-                                        'type'=>'image',
-                                        'data'=> 'data group array image',
+                                    ], 'img' => [
+                                        'name' => 'img',
+                                        'label' => 'img',
+                                        'type' => 'image',
+                                        'data' => 'data group array image',
                                     ],
                                 ],
                             ],
                         ],
                         [
-                            'text'=>[
-                                'name'=>'text',
-                                'label'=>'text',
-                                'type'=>'text',
-                                'data'=>'data second text',
+                            'text' => [
+                                'name' => 'text',
+                                'label' => 'text',
+                                'type' => 'text',
+                                'data' => 'data second text',
                             ],
-                            'url'=>[
-                                'name'=>'url',
-                                'label'=>'url',
-                                'type'=>'url',
-                                'data'=>[
-                                    'url'=> 'data url second data',
-                                    'text'=> 'data url second text',
+                            'url' => [
+                                'name' => 'url',
+                                'label' => 'url',
+                                'type' => 'url',
+                                'data' => [
+                                    'url' => 'data url second data',
+                                    'text' => 'data url second text',
                                 ],
-                            ], 'img'=>[
-                                'name'=>'img',
-                                'label'=>'img',
-                                'type'=>'image',
-                                'data'=> 'data second image',
-                            ], 'grup'=>[
-                                'name'=>'this is group',
-                                'label'=>'this is group',
-                                'type'=>'group',
-                                'data'=>[
-                                    'text'=>[
-                                        'name'=>'text',
-                                        'label'=>'text',
-                                        'type'=>'text',
-                                        'data'=> 'data group second text',
+                            ], 'img' => [
+                                'name' => 'img',
+                                'label' => 'img',
+                                'type' => 'image',
+                                'data' => 'data second image',
+                            ], 'grup' => [
+                                'name' => 'this is group',
+                                'label' => 'this is group',
+                                'type' => 'group',
+                                'data' => [
+                                    'text' => [
+                                        'name' => 'text',
+                                        'label' => 'text',
+                                        'type' => 'text',
+                                        'data' => 'data group second text',
                                     ],
-                                    'url'=>[
-                                        'name'=>'url',
-                                        'label'=>'url',
-                                        'type'=>'url',
-                                        'data'=>[
-                                            'url'=> 'data group url second data',
-                                            'text'=> 'data group url second text',
+                                    'url' => [
+                                        'name' => 'url',
+                                        'label' => 'url',
+                                        'type' => 'url',
+                                        'data' => [
+                                            'url' => 'data group url second data',
+                                            'text' => 'data group url second text',
                                         ],
-                                    ], 'img'=>[
-                                        'name'=>'img',
-                                        'label'=>'img',
-                                        'type'=>'image',
-                                        'data'=> 'data group second image',
+                                    ], 'img' => [
+                                        'name' => 'img',
+                                        'label' => 'img',
+                                        'type' => 'image',
+                                        'data' => 'data group second image',
                                     ],
                                 ],
                             ],
                         ],
                         [
-                            'text'=>[
-                                'name'=>'text',
-                                'label'=>'text',
-                                'type'=>'text',
-                                'data'=>'data third text',
+                            'text' => [
+                                'name' => 'text',
+                                'label' => 'text',
+                                'type' => 'text',
+                                'data' => 'data third text',
                             ],
-                            'url'=>[
-                                'name'=>'url',
-                                'label'=>'url',
-                                'type'=>'url',
-                                'data'=>[
-                                    'url'=> 'data url third data',
-                                    'text'=> 'data url third text',
+                            'url' => [
+                                'name' => 'url',
+                                'label' => 'url',
+                                'type' => 'url',
+                                'data' => [
+                                    'url' => 'data url third data',
+                                    'text' => 'data url third text',
                                 ],
-                            ], 'img'=>[
-                                'name'=>'img',
-                                'label'=>'img',
-                                'type'=>'image',
-                                'data'=> 'data third image',
-                            ], 'grup'=>[
-                                'name'=>'this is group',
-                                'label'=>'this is group',
-                                'type'=>'group',
-                                'data'=>[
-                                    'text'=>[
-                                        'name'=>'text',
-                                        'label'=>'text',
-                                        'type'=>'text',
-                                        'data'=> 'data group third text',
+                            ], 'img' => [
+                                'name' => 'img',
+                                'label' => 'img',
+                                'type' => 'image',
+                                'data' => 'data third image',
+                            ], 'grup' => [
+                                'name' => 'this is group',
+                                'label' => 'this is group',
+                                'type' => 'group',
+                                'data' => [
+                                    'text' => [
+                                        'name' => 'text',
+                                        'label' => 'text',
+                                        'type' => 'text',
+                                        'data' => 'data group third text',
                                     ],
-                                    'url'=>[
-                                        'name'=>'url',
-                                        'label'=>'url',
-                                        'type'=>'url',
-                                        'data'=>[
-                                            'url'=> 'data group url third data',
-                                            'text'=> 'data group url third text',
+                                    'url' => [
+                                        'name' => 'url',
+                                        'label' => 'url',
+                                        'type' => 'url',
+                                        'data' => [
+                                            'url' => 'data group url third data',
+                                            'text' => 'data group url third text',
                                         ],
-                                    ], 'img'=>[
-                                        'name'=>'img',
-                                        'label'=>'img',
-                                        'type'=>'image',
-                                        'data'=> 'data group third image',
+                                    ], 'img' => [
+                                        'name' => 'img',
+                                        'label' => 'img',
+                                        'type' => 'image',
+                                        'data' => 'data group third image',
                                     ],
                                 ],
                             ],
@@ -643,7 +643,7 @@ class BadasoContentApiTest extends TestCase
             $slug[] = $value->slug;
         }
 
-        $request_data = ['slug'=>join(',', $slug)];
+        $request_data = ['slug' => join(',', $slug)];
         $response = $this->json('GET', $this->getContentApiV1('/content/fetch-multiple'), $request_data);
         $response->assertSuccessful();
 
