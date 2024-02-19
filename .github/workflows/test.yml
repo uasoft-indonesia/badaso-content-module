@@ -78,9 +78,9 @@ jobs:
       - name: Laravel file configuration
         run: git branch &&
           cd laravel &&
-          composer require badaso/core:^2.0 &&
+          composer require badaso/core:^2.0 -W &&
           composer require badaso/content-module:dev-${GITHUB_HEAD_REF} &&
-          composer update --no-interaction
+          composer update --no-interaction -W
 
       # Mysql | Laravel setup
       - name: Mysql | Laravel setup
@@ -117,7 +117,7 @@ jobs:
           php artisan db:wipe &&
           php artisan migrate &&
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
-          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
+          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder"
 
       # Sqlite | Badaso Content Module test
       - name: Sqlite | Badaso Content Module test
@@ -142,8 +142,8 @@ jobs:
           php artisan db:wipe &&
           php artisan migrate &&
           php artisan db:seed --class="Database\Seeders\Badaso\BadasoSeeder" &&
-          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder" 
-          
+          php artisan db:seed --class="Database\Seeders\Badaso\Content\BadasoContentModuleSeeder"
+
       # Pgsql | Badaso Content Module test
       - name: Pgsql | Badaso Content Module test
         run: cd laravel && php artisan test
