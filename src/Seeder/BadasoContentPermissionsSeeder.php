@@ -19,6 +19,7 @@ class BadasoContentPermissionsSeeder extends Seeder
         foreach ($keys as $key) {
             Permission::firstOrCreate([
                 'key' => $key,
+                'description' => 'Fill content',
                 'table_name' => null,
             ]);
         }
