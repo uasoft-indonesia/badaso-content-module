@@ -3,7 +3,6 @@
 namespace Uasoft\Badaso\Module\Content\Commands;
 
 use Illuminate\Console\Command;
-use Symfony\Component\VarExporter\VarExporter;
 
 class BadasoContentSetup extends Command
 {
@@ -73,20 +72,20 @@ class BadasoContentSetup extends Command
         $hidden_table = config($config_name_file);
 
         $filter_hidden_tables = array_diff($hidden_table, $except_tables);
-        $filter_hidden_table=[];
+        $filter_hidden_table = [];
         foreach ($filter_hidden_tables as $value) {
-            $filter_hidden_table[] = str_replace(ENV('BADASO_TABLE_PREFIX'), "", $value);
+            $filter_hidden_table[] = str_replace(ENV('BADASO_TABLE_PREFIX'), '', $value);
         }
 
-        if (!in_array($table_name, $filter_hidden_table)) {
+        if (! in_array($table_name, $filter_hidden_table)) {
             $filter_hidden_table[] = $table_name;
 
-            $prefixed_hidden_table = array_map(function ($item) use ($filter_hidden_table) {
+            $prefixed_hidden_table = array_map(function ($item) {
                 return
                 "env('BADASO_TABLE_PREFIX', 'badaso_').'{$item}'";
             }, $filter_hidden_table);
 
-            $default_table = array_map(function ($item) use ($except_tables) {
+            $default_table = array_map(function ($item) {
                 return
                     "'{$item}'";
             }, $except_tables);
@@ -104,6 +103,5 @@ class BadasoContentSetup extends Command
 
             file_put_contents(config_path("{$config_name_file}.php"), $content_config);
         }
-
     }
 }
