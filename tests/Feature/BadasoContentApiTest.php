@@ -3,7 +3,7 @@
 namespace Uasoft\Badaso\Module\Content\Tests\Feature;
 
 use Tests\TestCase;
-use Uasoft\Badaso\Helpers\CallHelperTest;
+use Uasoft\Badaso\Helpers\CallHelper;
 use Uasoft\Badaso\Module\Content\Models\Content;
 
 class BadasoContentApiTest extends TestCase
@@ -20,7 +20,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_add()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         for ($i = 0; $i < 4; $i++) {
             $slug = 'This is Slug'."$i";
             $label = 'This is label'."$i";
@@ -142,7 +142,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_browse()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
 
         $response = $this->withHeader('Authorization', "Bearer $token")->json('GET', $this->getContentApiV1('/content'));
         $response->assertSuccessful();
@@ -160,7 +160,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_read()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
 
         $request_data = Content::latest()->first();
         $request_data = [
@@ -224,7 +224,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_edit()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->orderBy('id', 'asc')->first();
         $request_data = [
             'id' => $table->id,
@@ -372,7 +372,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_fill()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::orderBy('id', 'asc')->latest()->first();
         $request_data = [
             'id' => $table->id,
@@ -705,7 +705,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_delete()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->first();
         $request_data = [
             'id' => $table->id,
@@ -718,7 +718,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_multiple_delete()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->limit(3)->get();
         $ids = [];
         foreach ($table as $key => $value) {
