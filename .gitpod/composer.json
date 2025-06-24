@@ -28,7 +28,7 @@
     "zircote/swagger-php": "^4.0",
     "google/apiclient": "^2.14",
     "predis/predis": "^2.1",
-    "symfony/var-exporter": "^6.0"
+    "symfony/var-exporter": "^6.0 | ^7.0"
   },
   "require-dev": {
     "fakerphp/faker": "^1.20",
