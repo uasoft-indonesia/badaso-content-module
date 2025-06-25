@@ -655,16 +655,23 @@ class BadasoContentApiTest extends TestCase
             $table_data_value = json_decode($table_data->value, true);
             foreach ($table_data_value as $key_tab => $tab) {
                 if ($tab['type'] == 'group') {
-                    if ($table_data_value[$key_tab]['data']) {
-                        foreach ($table_data_value[$key_tab]['data'] as $key_table_data_value => $value_table_data_value) {
-                            if ($tab['data'][$value_table_data_value['name']]) {
-                                if ($value_table_data_value['type'] == 'url') {
-                                    $this->assertTrue($value_table_data_value['data']['url'] == $value[$key_tab]['data'][$key_table_data_value]['data']['url']);
-                                    $this->assertTrue($value_table_data_value['data']['text'] == $value[$key_tab]['data'][$key_table_data_value]['data']['text']);
-                                } elseif ($value_table_data_value['type'] == 'image') {
-                                    $this->assertTrue($value_table_data_value['data'] == $value[$key_tab]['data'][$key_table_data_value]['data']);
-                                } else {
-                                    $this->assertTrue($value_table_data_value['data'] == $value[$key_tab]['data'][$key_table_data_value]['data']);
+                    if ($tab['type'] == 'group') {
+                        if (!empty($table_data_value[$key_tab]['data'])) {
+                            foreach ($table_data_value[$key_tab]['data'] as $key_table_data_value => $value_table_data_value) {
+                                if (!empty($tab['data'][$value_table_data_value['name']])) {
+
+                                    $expected = $value_table_data_value['data'];
+                                    $actual = $value[$key_tab]['data'][$key_table_data_value]['data'] ?? null;
+
+                                    if ($value_table_data_value['type'] == 'url') {
+                                        $this->assertIsArray($actual, "Expected array at \$value[$key_tab]['data'][$key_table_data_value]['data']");
+                                        $this->assertTrue($expected['url'] == ($actual['url'] ?? null));
+                                        $this->assertTrue($expected['text'] == ($actual['text'] ?? null));
+                                    } elseif ($value_table_data_value['type'] == 'image') {
+                                        $this->assertTrue($expected == $actual);
+                                    } else {
+                                        $this->assertTrue($expected == $actual);
+                                    }
                                 }
                             }
                         }
