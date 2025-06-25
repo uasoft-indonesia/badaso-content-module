@@ -656,10 +656,9 @@ class BadasoContentApiTest extends TestCase
             foreach ($table_data_value as $key_tab => $tab) {
                 if ($tab['type'] == 'group') {
                     if ($tab['type'] == 'group') {
-                        if (!empty($table_data_value[$key_tab]['data'])) {
+                        if (! empty($table_data_value[$key_tab]['data'])) {
                             foreach ($table_data_value[$key_tab]['data'] as $key_table_data_value => $value_table_data_value) {
-                                if (!empty($tab['data'][$value_table_data_value['name']])) {
-
+                                if (! empty($tab['data'][$value_table_data_value['name']])) {
                                     $expected = $value_table_data_value['data'];
                                     $actual = $value[$key_tab]['data'][$key_table_data_value]['data'] ?? null;
 
