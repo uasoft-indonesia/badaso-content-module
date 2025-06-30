@@ -3,7 +3,7 @@
 namespace Uasoft\Badaso\Module\Content\Tests\Feature;
 
 use Tests\TestCase;
-use Uasoft\Badaso\Helpers\CallHelperTest;
+use Uasoft\Badaso\Helpers\CallHelper;
 use Uasoft\Badaso\Module\Content\Models\Content;
 
 class BadasoContentApiTest extends TestCase
@@ -20,7 +20,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_add()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         for ($i = 0; $i < 4; $i++) {
             $slug = 'This is Slug'."$i";
             $label = 'This is label'."$i";
@@ -142,7 +142,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_browse()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
 
         $response = $this->withHeader('Authorization', "Bearer $token")->json('GET', $this->getContentApiV1('/content'));
         $response->assertSuccessful();
@@ -160,7 +160,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_read()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
 
         $request_data = Content::latest()->first();
         $request_data = [
@@ -224,7 +224,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_edit()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->orderBy('id', 'asc')->first();
         $request_data = [
             'id' => $table->id,
@@ -372,7 +372,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_fill()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::orderBy('id', 'asc')->latest()->first();
         $request_data = [
             'id' => $table->id,
@@ -655,16 +655,22 @@ class BadasoContentApiTest extends TestCase
             $table_data_value = json_decode($table_data->value, true);
             foreach ($table_data_value as $key_tab => $tab) {
                 if ($tab['type'] == 'group') {
-                    if ($table_data_value[$key_tab]['data']) {
-                        foreach ($table_data_value[$key_tab]['data'] as $key_table_data_value => $value_table_data_value) {
-                            if ($tab['data'][$value_table_data_value['name']]) {
-                                if ($value_table_data_value['type'] == 'url') {
-                                    $this->assertTrue($value_table_data_value['data']['url'] == $value[$key_tab]['data'][$key_table_data_value]['data']['url']);
-                                    $this->assertTrue($value_table_data_value['data']['text'] == $value[$key_tab]['data'][$key_table_data_value]['data']['text']);
-                                } elseif ($value_table_data_value['type'] == 'image') {
-                                    $this->assertTrue($value_table_data_value['data'] == $value[$key_tab]['data'][$key_table_data_value]['data']);
-                                } else {
-                                    $this->assertTrue($value_table_data_value['data'] == $value[$key_tab]['data'][$key_table_data_value]['data']);
+                    if ($tab['type'] == 'group') {
+                        if (! empty($table_data_value[$key_tab]['data'])) {
+                            foreach ($table_data_value[$key_tab]['data'] as $key_table_data_value => $value_table_data_value) {
+                                if (! empty($tab['data'][$value_table_data_value['name']])) {
+                                    $expected = $value_table_data_value['data'];
+                                    $actual = $value[$key_tab]['data'][$key_table_data_value]['data'] ?? null;
+
+                                    if ($value_table_data_value['type'] == 'url') {
+                                        $this->assertIsArray($actual, "Expected array at \$value[$key_tab]['data'][$key_table_data_value]['data']");
+                                        $this->assertTrue($expected['url'] == ($actual['url'] ?? null));
+                                        $this->assertTrue($expected['text'] == ($actual['text'] ?? null));
+                                    } elseif ($value_table_data_value['type'] == 'image') {
+                                        $this->assertTrue($expected == $actual);
+                                    } else {
+                                        $this->assertTrue($expected == $actual);
+                                    }
                                 }
                             }
                         }
@@ -705,7 +711,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_delete()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->first();
         $request_data = [
             'id' => $table->id,
@@ -718,7 +724,7 @@ class BadasoContentApiTest extends TestCase
 
     public function test_multiple_delete()
     {
-        $token = CallHelperTest::login($this);
+        $token = CallHelper::login($this);
         $table = Content::latest()->limit(3)->get();
         $ids = [];
         foreach ($table as $key => $value) {
